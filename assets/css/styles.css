@@ -732,6 +732,27 @@ img {
   visibility: visible;
 }
 
+/*==================== VIDEO ====================*/
+.video {
+    text-align: center;
+    padding: 2rem 0;
+}
+
+.video__container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1rem;
+}
+
+.video__iframe {
+    width: 100%;
+    max-width: 800px;
+    height: 450px;
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
 /*==================== PORTFOLIO ====================*/
 .portfolio__container {
   overflow: initial;
