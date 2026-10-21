@@ -56,7 +56,6 @@ document.addEventListener('DOMContentLoaded', () => {
     for (let i = 0; i < skillsContent.length; i++) {
         skillsContent[i].className = "skills__content skills__close";
     }
-    AOS.init();
 });
 
 /*==================== QUALIFICATION TABS ====================*/
@@ -141,18 +140,16 @@ function scrollActive() {
     const verticalScrollPosition = window.verticalScrollPosition || window.pageYOffset;
 
     sections.forEach((current) => {
+        const sectionId = current.getAttribute("id");
+        const sectionLink = document.querySelector(`.nav__menu a[href="#${sectionId}"]`);
+        if (current.hidden || !sectionLink) return;
         const sectionHeight = current.offsetHeight;
         const sectionTop = current.offsetTop - 50;
-        let sectionId = current.getAttribute("id");
 
         if (verticalScrollPosition > sectionTop && verticalScrollPosition <= sectionTop + sectionHeight) {
-            document
-                .querySelector(".nav__menu a[href*=" + sectionId + "]")
-                .classList.add("active-link");
+            sectionLink.classList.add("active-link");
         } else {
-            document
-                .querySelector(".nav__menu a[href*=" + sectionId + "]")
-                .classList.remove("active-link");
+            sectionLink.classList.remove("active-link");
         }
     });
 }
@@ -162,7 +159,7 @@ window.addEventListener("scroll", scrollActive);
 /*==================== CHANGE BACKGROUND HEADER ====================*/
 function scrollHeader() {
     const nav = document.getElementById("header");
-    if (this.verticalScrollPosition >= 80) nav.classList.add("scroll-header");
+    if (window.scrollY >= 80) nav.classList.add("scroll-header");
     else nav.classList.remove("scroll-header");
 }
 
@@ -171,7 +168,7 @@ window.addEventListener("scroll", scrollHeader);
 /*==================== SHOW SCROLL UP ====================*/
 function scrollUp() {
     const scrollUp = document.getElementById("scroll-up");
-    if (this.verticalScrollPosition >= 560) scrollUp.classList.add("show-scroll");
+    if (window.scrollY >= 560) scrollUp.classList.add("show-scroll");
     else scrollUp.classList.remove("show-scroll");
 }
 
