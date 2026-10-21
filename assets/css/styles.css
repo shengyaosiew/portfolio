@@ -479,6 +479,16 @@ img {
   margin-bottom: var(--mb-0-5);
 }
 
+.skills__certification-icon {
+  width: 32px;
+  height: 32px;
+  max-width: none;
+  object-fit: contain;
+  flex: 0 0 32px;
+  align-self: center;
+  margin-right: 0.5rem;
+}
+
 .skills__name {
   font-size: var(--normal-font-size);
   font-weight: var(--font-medium);
@@ -587,6 +597,27 @@ img {
   display: grid;
   grid-template-columns: 1fr max-content 1fr;
   column-gap: 1.5rem;
+}
+
+.qualification__logos {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: var(--mb-0-5);
+}
+
+.qualification__logos .qualification__logo {
+  flex: 0 0 48px;
+  margin-bottom: 0;
+}
+
+.qualification__logo {
+  display: block;
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
+  margin-bottom: var(--mb-0-5);
 }
 
 .qualification__title {
@@ -885,6 +916,49 @@ img {
 /*==================== CONTACT ME ====================*/
 .contact__container {
   row-gap: 3rem;
+}
+
+.contact__container--details {
+  grid-template-columns: 1fr;
+}
+
+.contact__details {
+  display: grid;
+  grid-column: 1 / -1;
+  gap: 1.5rem;
+  width: 100%;
+  max-width: 680px;
+  margin-inline: auto;
+}
+
+.contact__details .contact__information {
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0.75rem;
+  margin-bottom: 0;
+  padding: 2rem 1rem;
+  border-radius: 0.75rem;
+  background-color: var(--input-color);
+}
+
+.contact__details .contact__icon {
+  flex-shrink: 0;
+  margin-bottom: 0;
+}
+
+.contact__details .contact__subtitle {
+  overflow-wrap: anywhere;
+}
+
+@media screen and (min-width: 568px) {
+  .contact__container.contact__container--details {
+    grid-template-columns: 1fr;
+  }
+
+  .contact__details {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 }
 
 .contact__information {
