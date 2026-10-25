@@ -15,7 +15,7 @@ I am a **Microsoft Certified: Power BI Data Analyst Associate (PL-300)** and Com
 ## Website Features
 
 - Responsive layout for desktop, tablet, and mobile screens.
-- EN / 中文 language selection with English as the default and a full Simplified Chinese translation.
+- Flag dropdown for English, 中文, and Bahasa Melayu, with full Chinese and Malay translations and a saved language preference.
 - Skills grouped around business intelligence, data and AI, business operations, and development tools.
 - Journey and Achievements timelines with organisation logos.
 - Services covering Data Analysis & Insights, Power BI & Reporting, and AI & Automation.
@@ -48,13 +48,14 @@ This is a static website. No package installation, build command, backend, or AP
 | `assets/js/effects.js` | Scroll reveals and reading progress |
 | `assets/js/i18n.js` | Language selection and reversible translation updates |
 | `assets/i18n/zh-CN.json` | Simplified Chinese translations keyed by normalized English text |
+| `assets/i18n/ms.json` | Malay translations keyed by normalized English text |
 | `assets/img/` | Photos, organisation logos, and project images |
 | `assets/pdf/` | Downloadable résumé |
 | `.github/workflows/static.yml` | GitHub Pages deployment workflow |
 
 Temporary preview files in `tmp/` are excluded from Git by `.gitignore`.
 
-The page starts in English on every load. Select 中文 in the navigation to translate it. To update a translation, edit `assets/i18n/zh-CN.json`; keys must match the English text in the HTML, with consecutive whitespace collapsed to a single space. Personal names, company names, and product names remain unchanged. The separate privacy policy and downloadable résumé are not translated by the page toggle.
+The page starts in English for first-time visitors. Select English, 中文, or Bahasa Melayu in the navigation dropdown; the selection is saved in browser local storage and restored after refresh or a later visit. To update a translation, edit `assets/i18n/zh-CN.json` or `assets/i18n/ms.json`; keys must match the English text in the HTML, with consecutive whitespace collapsed to a single space. The Chinese version uses 萧胜耀 for Siew Sheng Yao; company and product names remain unchanged. The separate privacy policy and downloadable résumé are not translated by the language dropdown.
 
 ## Publish on GitHub Pages
 

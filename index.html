@@ -39,7 +39,7 @@
     <!--==================== CSS ====================-->
     <link rel="stylesheet" href="./assets/css/styles.css?v=contact-layout-2">
     <link rel="stylesheet" href="./assets/css/responsive.css?v=contact-layout-2">
-    <link rel="stylesheet" href="./assets/css/polish.css?v=1">
+    <link rel="stylesheet" href="./assets/css/polish.css?v=language-4">
 
     <meta name="google-site-verification" content="4JoBh4Tg3QjERPki-VvRqqCvmmvfqc6jNpj0toHUudk" />
     <!-- Google tag (gtag.js) -->
@@ -96,13 +96,27 @@
                 <i class="uil uil-times nav__close" id="nav-close"></i>
             </div>
             <div class="nav__btns">
-                <label class="language-switch">
-                    <span class="language-switch__label">Language / 语言</span>
-                    <select id="language-select" aria-label="Language / 语言">
-                        <option value="en" lang="en" selected>EN</option>
-                        <option value="zh-CN" lang="zh-CN">中文</option>
-                    </select>
-                </label>
+                <details class="language-switch" id="language-switch" aria-busy="false">
+                    <summary class="language-switch__trigger" id="language-trigger" aria-label="Language / 语言 / Bahasa" aria-controls="language-options">
+                        <img src="./assets/img/flag-us.png" class="language-switch__flag" alt="" width="20" height="15">
+                        <span class="language-switch__current">EN</span>
+                        <span class="language-switch__chevron" aria-hidden="true"></span>
+                    </summary>
+                    <ul class="language-switch__options" id="language-options" aria-label="Language / 语言 / Bahasa">
+                        <li><button type="button" class="language-switch__option" data-language="en" data-label="EN" aria-pressed="true" lang="en">
+                            <img src="./assets/img/flag-us.png" class="language-switch__flag" alt="" width="20" height="15">
+                            <span>English</span>
+                        </button></li>
+                        <li><button type="button" class="language-switch__option" data-language="zh-CN" data-label="CN" aria-pressed="false" lang="zh-CN">
+                            <img src="./assets/img/flag-cn.png" class="language-switch__flag" alt="" width="20" height="15">
+                            <span>中文</span>
+                        </button></li>
+                        <li><button type="button" class="language-switch__option" data-language="ms" data-label="BM" aria-pressed="false" lang="ms">
+                            <img src="./assets/img/flag-malaysia.png" class="language-switch__flag" alt="" width="20" height="15">
+                            <span>Bahasa Melayu</span>
+                        </button></li>
+                    </ul>
+                </details>
                 <span id="language-status" class="language-switch__label" role="status"></span>
 
                 <!-- theme change button  -->
@@ -1186,7 +1200,7 @@
     <!--==================== MAIN JS ====================-->
     <script src="./assets/js/main.js?v=polish-1"></script>
     <script src="./assets/js/effects.js?v=1"></script>
-    <script src="./assets/js/i18n.js?v=1"></script>
+    <script src="./assets/js/i18n.js?v=5"></script>
     </body>
 
 </html>
