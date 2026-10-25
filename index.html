@@ -96,6 +96,14 @@
                 <i class="uil uil-times nav__close" id="nav-close"></i>
             </div>
             <div class="nav__btns">
+                <label class="language-switch">
+                    <span class="language-switch__label">Language / 语言</span>
+                    <select id="language-select" aria-label="Language / 语言">
+                        <option value="en" lang="en" selected>EN</option>
+                        <option value="zh-CN" lang="zh-CN">中文</option>
+                    </select>
+                </label>
+                <span id="language-status" class="language-switch__label" role="status"></span>
 
                 <!-- theme change button  -->
                 <i class="uil uil-moon change-theme" id="theme-button"></i>
@@ -1178,6 +1186,7 @@
     <!--==================== MAIN JS ====================-->
     <script src="./assets/js/main.js?v=polish-1"></script>
     <script src="./assets/js/effects.js?v=1"></script>
+    <script src="./assets/js/i18n.js?v=1"></script>
     </body>
 
 </html>

@@ -15,6 +15,7 @@ I am a **Microsoft Certified: Power BI Data Analyst Associate (PL-300)** and Com
 ## Website Features
 
 - Responsive layout for desktop, tablet, and mobile screens.
+- EN / 中文 language selection with English as the default and a full Simplified Chinese translation.
 - Skills grouped around business intelligence, data and AI, business operations, and development tools.
 - Journey and Achievements timelines with organisation logos.
 - Services covering Data Analysis & Insights, Power BI & Reporting, and AI & Automation.
@@ -31,7 +32,7 @@ This is a static website. No package installation, build command, backend, or AP
 ## Run Locally
 
 1. Clone or download this repository.
-2. Open `index.html` in a modern browser, or use a local preview server such as VS Code Live Server.
+2. Use a local preview server such as VS Code Live Server to open `index.html`. The language switch loads JSON with `fetch`, which requires HTTP rather than opening the file directly.
 3. Edit the HTML, stylesheets, or scripts and refresh the preview to see your changes.
 
 ## Project Files
@@ -45,11 +46,15 @@ This is a static website. No package installation, build command, backend, or AP
 | `assets/css/polish.css` | Visual accents, transitions, and motion preferences |
 | `assets/js/main.js` | Navigation, theme switching, skills, tabs, and service popups |
 | `assets/js/effects.js` | Scroll reveals and reading progress |
+| `assets/js/i18n.js` | Language selection and reversible translation updates |
+| `assets/i18n/zh-CN.json` | Simplified Chinese translations keyed by normalized English text |
 | `assets/img/` | Photos, organisation logos, and project images |
 | `assets/pdf/` | Downloadable résumé |
 | `.github/workflows/static.yml` | GitHub Pages deployment workflow |
 
 Temporary preview files in `tmp/` are excluded from Git by `.gitignore`.
+
+The page starts in English on every load. Select 中文 in the navigation to translate it. To update a translation, edit `assets/i18n/zh-CN.json`; keys must match the English text in the HTML, with consecutive whitespace collapsed to a single space. Personal names, company names, and product names remain unchanged. The separate privacy policy and downloadable résumé are not translated by the page toggle.
 
 ## Publish on GitHub Pages
 
