@@ -1,0 +1,5 @@
+const { chromium } = require('playwright-core');
+(async()=>{const b=await chromium.launch({executablePath:'C:/Program Files/Google/Chrome/Application/chrome.exe'});
+for (const [w,h] of [[2560,1440],[1920,1080],[1440,900]]){const p=await b.newPage({viewport:{width:w,height:h}});await p.goto('http://localhost:4502/');await p.waitForTimeout(1500);
+console.log(w,h,await p.evaluate(()=>{const n=document.querySelector('.hero-name');const s=document.querySelector('.hero-subject').getBoundingClientRect();const c=document.querySelector('.hero-copy').getBoundingClientRect();return JSON.stringify({fs:getComputedStyle(n).fontSize,nameW:Math.round(n.getBoundingClientRect().width),subj:[Math.round(s.left),Math.round(s.width)],copyL:Math.round(c.left)})}));await p.screenshot({path:'lab/h2-'+w+'.png'});await p.close();}
+await b.close();})();

@@ -97,7 +97,7 @@ export default function Hero() {
       <div className="pointer-events-none absolute inset-x-0 bottom-0 z-30 h-[30svh] bg-gradient-to-t from-bone via-bone/80 to-transparent lg:h-[16svh] lg:via-transparent" />
 
       {/* 5 copy */}
-      <div className="absolute bottom-8 left-5 z-40 max-w-[330px] sm:bottom-12 sm:left-8 sm:max-w-md lg:bottom-16 lg:left-12 lg:max-w-lg">
+      <div className="hero-copy absolute bottom-8 left-5 z-40 max-w-[330px] sm:bottom-12 sm:left-8 sm:max-w-md lg:bottom-16 lg:max-w-lg">
         <a
           href={CREDENTIAL}
           target="_blank"

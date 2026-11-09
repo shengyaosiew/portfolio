@@ -1,0 +1,88 @@
+{
+  "meta": {
+    "title": "ShengYao",
+    "lang": "en",
+    "dark": false
+  },
+  "errors": [],
+  "failed": [],
+  "overflow": 0,
+  "report": [
+    {
+      "file": "lab/fhd/00-hero-0.png",
+      "videoTime": null
+    },
+    {
+      "file": "lab/fhd/01-powerbi-0.15.png",
+      "videoTime": null
+    },
+    {
+      "file": "lab/fhd/02-powerbi-0.5.png",
+      "videoTime": null
+    },
+    {
+      "file": "lab/fhd/03-powerbi-1.png",
+      "videoTime": null
+    },
+    {
+      "file": "lab/fhd/04-hours-0.3.png",
+      "videoTime": null
+    },
+    {
+      "file": "lab/fhd/05-ai-0.png",
+      "videoTime": null
+    },
+    {
+      "file": "lab/fhd/06-ai-0.5.png",
+      "videoTime": null
+    },
+    {
+      "file": "lab/fhd/07-ai-1.png",
+      "videoTime": null
+    },
+    {
+      "file": "lab/fhd/08-tickets-0.3.png",
+      "videoTime": null
+    },
+    {
+      "file": "lab/fhd/09-tickets-0.55.png",
+      "videoTime": null
+    },
+    {
+      "file": "lab/fhd/10-tickets-1.png",
+      "videoTime": null
+    },
+    {
+      "file": "lab/fhd/11-reach-0.45.png",
+      "videoTime": null
+    },
+    {
+      "file": "lab/fhd/12-journey-0.4.png",
+      "videoTime": null
+    },
+    {
+      "file": "lab/fhd/13-skills-0.png",
+      "videoTime": null
+    },
+    {
+      "file": "lab/fhd/14-skills-0.6.png",
+      "videoTime": null
+    },
+    {
+      "file": "lab/fhd/15-events-0.1.png",
+      "videoTime": null
+    },
+    {
+      "file": "lab/fhd/16-projects-0.2.png",
+      "videoTime": null
+    },
+    {
+      "file": "lab/fhd/17-projects-step2.png",
+      "videoTime": null
+    },
+    {
+      "file": "lab/fhd/18-contact-0.png",
+      "videoTime": null
+    }
+  ]
+}

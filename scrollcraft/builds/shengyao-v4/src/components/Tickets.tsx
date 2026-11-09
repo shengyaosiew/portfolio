@@ -116,7 +116,7 @@ export default function Tickets() {
 
   return (
     <section ref={secRef} id="ai-tickets" className={`relative bg-night text-night-ink ${reduce ? "" : "h-[320vh]"}`}>
-      <div className="sticky top-0 grid h-[100dvh] overflow-x-clip grid-rows-[auto_minmax(0,1fr)_auto] gap-3 px-5 pb-6 pt-24 md:grid-cols-[4fr_7fr] md:grid-rows-1 md:gap-12 md:px-12 md:pb-8">
+      <div className="sticky top-0 mx-auto grid h-[100dvh] w-full max-w-7xl overflow-x-clip grid-rows-[auto_minmax(0,1fr)_auto] gap-3 px-5 pb-6 pt-24 md:grid-cols-[4fr_7fr] md:grid-rows-1 md:gap-12 md:px-12 md:pb-8">
         <div className="relative min-h-[9.5rem] md:min-h-0 md:self-center">
           <div ref={(el) => { cueRefs.current[0] = el; }} className="absolute inset-x-0 top-0 md:top-1/2 md:-translate-y-1/2">
             <p className="label mb-4 text-night-soft">{T.label}</p>
