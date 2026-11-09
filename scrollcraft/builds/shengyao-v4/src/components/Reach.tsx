@@ -1,5 +1,5 @@
-import { motion } from "motion/react";
 import WorldMap from "./ui/world-map";
+import AIPipeline from "./AIPipeline";
 import { CountUp } from "./Hours";
 import { useReducedMotion } from "../lib/hooks";
 import { useI18n } from "../i18n";
@@ -66,48 +66,7 @@ export default function Reach() {
           </p>
         </div>
 
-        <figure className="mt-20 border-t-2 border-ink pt-6 md:mt-28">
-          <div className="flex flex-wrap items-end justify-between gap-4">
-            <div>
-              <p className="label text-ink-soft">{T.aiLabel}</p>
-              <h3 className="display mt-3 text-3xl sm:text-4xl">{T.aiH}</h3>
-            </div>
-            <p className="max-w-[36ch] text-ink-soft">{T.aiP}</p>
-          </div>
-          <div className="mt-8 grid gap-5">
-            {[
-              { k: T.before, w: 100, cls: "bg-ink/15 text-ink" },
-              { k: T.after, w: 52, cls: "bg-accent text-white" },
-            ].map((b, i) => (
-              <div key={b.k} className="grid grid-cols-[4.5rem_minmax(0,1fr)] items-center gap-4 sm:grid-cols-[6rem_minmax(0,1fr)]">
-                <span className="label text-ink-soft">{b.k}</span>
-                <div className="relative h-14">
-                  <motion.div
-                    className={`absolute inset-y-0 left-0 flex items-center justify-end rounded-[3px] pr-3 text-lg font-bold tabular-nums ${b.cls}`}
-                    style={{ width: `${b.w}%`, transformOrigin: "0 50%" }}
-                    initial={{ scaleX: reduce ? 1 : 0 }}
-                    whileInView={{ scaleX: 1 }}
-                    viewport={{ once: true, amount: 0.8 }}
-                    transition={{ duration: 0.9, delay: 0.2 + i * 0.25, ease: [0.22, 1, 0.36, 1] }}
-                  >
-                    {b.w}
-                  </motion.div>
-                  {i === 1 && (
-                    <motion.div
-                      className="display absolute -inset-y-1.5 left-[52%] right-0 flex items-center justify-center rounded-[3px] border-[1.5px] border-dashed border-accent text-3xl text-accent"
-                      initial={{ opacity: reduce ? 1 : 0 }}
-                      whileInView={{ opacity: 1 }}
-                      viewport={{ once: true, amount: 0.8 }}
-                      transition={{ duration: 0.5, delay: 1 }}
-                    >
-                      −48%
-                    </motion.div>
-                  )}
-                </div>
-              </div>
-            ))}
-          </div>
-        </figure>
+        <AIPipeline />
       </div>
     </section>
   );

@@ -180,3 +180,13 @@ html.dark .grain { mix-blend-mode: screen; opacity: 0.05; filter: invert(1); }
   .li-ring, .li-sweep { display: none; }
   .shine::after { display: none; }
 }
+
+/* AI pipeline tokens */
+.tok { position: absolute; left: 0; top: 0; border-radius: 3px; background: rgba(163,168,177,.5); will-change: transform, opacity; transition: background-color .3s, box-shadow .3s, outline-color .3s; }
+.tok[data-s="kept"] { background: #FF6B4E; box-shadow: 0 0 12px rgba(255,107,78,.45); }
+.tok[data-s="cut"] { background: transparent; outline: 1.5px solid rgba(255,107,78,.75); outline-offset: -1.5px; }
+.cut-chip { transition: box-shadow .3s, background-color .3s; }
+.cut-chip[data-on="1"] { box-shadow: 0 0 0 6px rgba(255,107,78,.12), 0 0 24px rgba(255,107,78,.35); animation: cut-pulse 1.2s ease-in-out infinite; }
+@keyframes cut-pulse { 50% { box-shadow: 0 0 0 10px rgba(255,107,78,.05), 0 0 32px rgba(255,107,78,.5); } }
+.saved-hatch { background: repeating-linear-gradient(135deg, rgba(255,107,78,.28) 0 6px, transparent 6px 12px); border-left: 2px dashed rgba(255,107,78,.7); }
+@media (prefers-reduced-motion: reduce) { .cut-chip[data-on="1"] { animation: none; } }
