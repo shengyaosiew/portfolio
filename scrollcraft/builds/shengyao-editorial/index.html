@@ -1,0 +1,461 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Siew Sheng Yao · Data analyst who makes the numbers answer back</title>
+<meta name="description" content="Microsoft Certified Power BI Data Analyst (PL-300). Measurable analytics and automation work, verified. Available for full-time roles from March 2027.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='%23F3EEE4'/><rect x='9' y='9' width='14' height='14' rx='2' fill='%231A1712'/></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..600;1,9..144,400&family=Newsreader:ital,opsz@0,6..72;1,6..72&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="scrollcraft.css">
+<style>
+  /* ---- The rebrand: editorial, warm paper, near-black ink, one deep accent.
+     Not premium-minimal dark. Not the cream-and-brass artisan trap: the ink is
+     true off-black and the accent is an ink-blue, not brass. ---- */
+  :root {
+    --sc-canvas:      #F3EEE4;   /* warm paper */
+    --sc-surface:     #EAE3D5;   /* a slightly deeper leaf */
+    --sc-ink:         #1A1712;   /* near-black, warm */
+    --sc-ink-soft:    #6B6459;   /* tinted secondary, derived from the ink */
+    --sc-accent:      #1C3A5E;   /* ink blue: the register/proof colour */
+    --sc-accent-ink:  #F3EEE4;
+
+    --sc-hairline:        color-mix(in oklab, var(--sc-ink) 14%, transparent);
+    --sc-hairline-strong: color-mix(in oklab, var(--sc-ink) 26%, transparent);
+
+    --sc-font-display: "Fraunces", Georgia, serif;
+    --sc-font-text:    "Newsreader", Georgia, serif;
+    --sc-font-mono:    "Geist Mono", ui-monospace, monospace;
+
+    --sc-shadow-color: 36 24% 12%;
+    --sc-measure: 60ch;
+
+    /* chapter grounds, hard cuts (not drift) */
+    --paper:  #F3EEE4;
+    --paper-2:#EEE7DA;
+    --slate:  #16202B;   /* the one dark chapter: the peak ground */
+  }
+
+  /* grain tuned warmer and lighter for paper */
+  .sc-grain { opacity: 0.03; mix-blend-mode: multiply; }
+
+  /* ---------- editorial chrome: a folio in the margin, no fixed bar ------- */
+  .folio {
+    position: fixed; top: 0; left: 0; z-index: var(--sc-z-chrome);
+    width: clamp(10rem, 19vw, 17rem); height: 100vh; height: 100svh;
+    padding: var(--sc-6) var(--sc-5);
+    display: flex; flex-direction: column; gap: var(--sc-5);
+    border-right: 1px solid var(--sc-hairline);
+    pointer-events: none;
+    mix-blend-mode: normal;
+  }
+  .folio__mark {
+    font-family: var(--sc-font-display);
+    font-weight: 500; font-size: var(--sc-t-base);
+    letter-spacing: var(--sc-track-snug); line-height: 1.1;
+    color: var(--sc-ink);
+  }
+  .folio__mark span { display: block; font-size: var(--sc-t-xs); color: var(--sc-ink-soft); font-family: var(--sc-font-mono); letter-spacing: var(--sc-track-wide); text-transform: uppercase; margin-top: var(--sc-2); }
+  .folio__chapter { font-family: var(--sc-font-mono); font-size: var(--sc-t-xs); letter-spacing: var(--sc-track-wide); text-transform: uppercase; color: var(--sc-ink-soft); }
+  .folio__chapter b { display: block; color: var(--sc-ink); font-weight: 500; margin-top: var(--sc-1); text-transform: none; font-size: var(--sc-t-sm); letter-spacing: var(--sc-track-snug); font-family: var(--sc-font-display); }
+
+  /* ---------- the signature move: the verification ledger ---------------- */
+  .ledger { margin-top: auto; display: flex; flex-direction: column; gap: var(--sc-2); }
+  .ledger__head { font-family: var(--sc-font-mono); font-size: 0.62rem; letter-spacing: var(--sc-track-wide); text-transform: uppercase; color: var(--sc-ink-soft); padding-bottom: var(--sc-2); border-bottom: 1px solid var(--sc-hairline); }
+  .ledger__item {
+    display: grid; grid-template-columns: 0.9rem 1fr; gap: var(--sc-2);
+    align-items: start;
+    font-family: var(--sc-font-mono); font-size: 0.66rem; line-height: 1.35;
+    color: var(--sc-ink-soft);
+    opacity: 0; transform: translateY(4px);
+    transition: opacity 420ms var(--sc-ease-out), transform 420ms var(--sc-ease-out);
+  }
+  .ledger__item.is-logged { opacity: 1; transform: none; }
+  .ledger__check { color: var(--sc-accent); font-weight: 500; }
+  .ledger__item b { display: block; color: var(--sc-ink); font-weight: 500; }
+  .ledger__tally { display: none; }
+
+  /* on a dark chapter the folio flips its ink so it stays readable */
+  body.is-dark .folio { border-right-color: color-mix(in oklab, #fff 16%, transparent); }
+  body.is-dark .folio__mark, body.is-dark .folio__chapter b, body.is-dark .ledger__item b { color: #F3EEE4; }
+  body.is-dark .folio__mark span, body.is-dark .folio__chapter, body.is-dark .ledger__head, body.is-dark .ledger__item { color: #B8B1A4; }
+  .folio, .folio__mark, .folio__chapter b, .ledger__item b, .folio__mark span, .folio__chapter, .ledger__head, .ledger__item { transition: color 600ms var(--sc-ease-out), border-color 600ms var(--sc-ease-out); }
+
+  /* ---------- page column: content sits to the right of the folio -------- */
+  .leaf { margin-left: clamp(10rem, 19vw, 17rem); }
+  .leaf .sc-wrap { max-width: 64rem; padding-inline: clamp(1.5rem, 4vw, 4.5rem); }
+
+  /* ---------- title page (hero), no media above the fold ----------------- */
+  .title-page { min-height: 100vh; min-height: 100svh; display: flex; flex-direction: column; justify-content: center; background: var(--paper); }
+  .title-page .kicker { font-family: var(--sc-font-mono); font-size: var(--sc-t-sm); letter-spacing: var(--sc-track-wide); text-transform: uppercase; color: var(--sc-accent); margin: 0 0 var(--sc-5); }
+  .title-page h1 { font-family: var(--sc-font-display); font-weight: 400; font-size: var(--sc-t-4xl); line-height: 0.98; letter-spacing: var(--sc-track-tight); margin: 0; text-wrap: balance; }
+  .title-page h1 em { font-style: italic; }
+  .title-page .promise { font-size: var(--sc-t-lg); line-height: 1.5; color: var(--sc-ink-soft); max-width: 40ch; margin: var(--sc-6) 0 0; text-wrap: pretty; }
+  .title-page .credits { margin-top: var(--sc-8); display: flex; flex-wrap: wrap; gap: var(--sc-3) var(--sc-6); font-family: var(--sc-font-mono); font-size: var(--sc-t-xs); letter-spacing: var(--sc-track-wide); text-transform: uppercase; color: var(--sc-ink-soft); }
+  .title-page .credits span b { color: var(--sc-ink); font-weight: 500; }
+
+  /* ---------- intertitle: full-stop plate between chapters --------------- */
+  .intertitle { min-height: 76vh; display: flex; align-items: center; background: var(--paper-2); }
+  .intertitle .no { font-family: var(--sc-font-mono); font-size: var(--sc-t-sm); letter-spacing: var(--sc-track-wide); color: var(--sc-accent); display: block; margin-bottom: var(--sc-4); }
+  .intertitle h2 { font-family: var(--sc-font-display); font-weight: 400; font-size: var(--sc-t-3xl); line-height: 1.02; letter-spacing: var(--sc-track-snug); margin: 0; max-width: 20ch; text-wrap: balance; }
+  .intertitle h2 em { font-style: italic; }
+
+  /* ---------- chapter body spreads: asymmetric, media in its own column --- */
+  .spread { padding-block: var(--sc-section); background: var(--paper); }
+  .spread__grid { display: grid; gap: clamp(2rem, 5vw, 5rem); grid-template-columns: 1fr; align-items: start; }
+  @media (min-width: 900px) { .spread__grid { grid-template-columns: 1.1fr 0.9fr; } .spread__grid.flip { grid-template-columns: 0.9fr 1.1fr; } .spread__grid.flip .spread__text { order: 2; } }
+  .spread__text h3 { font-family: var(--sc-font-display); font-weight: 400; font-size: var(--sc-t-2xl); line-height: 1.04; letter-spacing: var(--sc-track-snug); margin: 0 0 var(--sc-5); text-wrap: balance; }
+  .spread__text p { font-size: var(--sc-t-base); line-height: 1.66; color: var(--sc-ink); max-width: 52ch; margin: 0 0 var(--sc-4); }
+  .spread__text p.sub { color: var(--sc-ink-soft); }
+  .drop::first-letter { font-family: var(--sc-font-display); font-size: 3.4em; line-height: 0.78; float: left; padding: 0.06em 0.12em 0 0; color: var(--sc-accent); font-weight: 500; }
+
+  figure.plate { margin: 0; }
+  figure.plate img { width: 100%; height: auto; border-radius: var(--sc-r-sm); box-shadow: var(--sc-e2); border: 1px solid var(--sc-hairline); }
+  figure.plate figcaption { font-family: var(--sc-font-mono); font-size: var(--sc-t-xs); letter-spacing: var(--sc-track-snug); color: var(--sc-ink-soft); margin-top: var(--sc-3); padding-left: var(--sc-3); border-left: 1px solid var(--sc-hairline-strong); }
+
+  .portrait img { aspect-ratio: 4 / 5; object-fit: cover; object-position: 50% 20%; }
+
+  .facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr)); gap: var(--sc-5) var(--sc-6); margin-top: var(--sc-7); border-top: 1px solid var(--sc-hairline); padding-top: var(--sc-6); }
+  .facts dt { font-family: var(--sc-font-mono); font-size: var(--sc-t-xs); letter-spacing: var(--sc-track-wide); text-transform: uppercase; color: var(--sc-ink-soft); margin: 0 0 var(--sc-2); }
+  .facts dd { font-family: var(--sc-font-display); font-size: var(--sc-t-lg); margin: 0; color: var(--sc-ink); line-height: 1.1; }
+
+  /* ---------- the peak: figures that count, on the dark slate ground ------ */
+  .ledger-chapter { background: var(--slate); color: #F2ECE0; }
+  .ledger-chapter .intertitle, .ledger-chapter .spread { background: transparent; }
+  .figures { display: grid; gap: clamp(2.5rem, 6vh, 5rem); }
+  .figure { display: grid; grid-template-columns: 1fr; gap: var(--sc-4); padding-block: var(--sc-5); border-top: 1px solid color-mix(in oklab, #fff 14%, transparent); }
+  @media (min-width: 760px) { .figure { grid-template-columns: minmax(10rem, 0.5fr) 1fr; align-items: baseline; gap: clamp(2rem, 5vw, 4.5rem); } }
+  .figure__num { font-family: var(--sc-font-display); font-weight: 400; font-size: clamp(3.2rem, 2rem + 6vw, 6.2rem); line-height: 0.9; letter-spacing: var(--sc-track-tight); color: #fff; font-variant-numeric: tabular-nums; }
+  .figure__num .unit { font-size: 0.4em; color: #A9D0EE; letter-spacing: var(--sc-track-snug); margin-left: 0.15em; }
+  .figure__body h4 { font-family: var(--sc-font-display); font-weight: 400; font-size: var(--sc-t-xl); margin: 0 0 var(--sc-3); line-height: 1.1; color: #F2ECE0; }
+  .figure__body p { font-size: var(--sc-t-base); line-height: 1.6; color: #BFC7CF; margin: 0; max-width: 46ch; }
+  .figure__src { font-family: var(--sc-font-mono); font-size: var(--sc-t-xs); letter-spacing: var(--sc-track-snug); text-transform: uppercase; color: #8FA8BF; margin-top: var(--sc-3); display: flex; align-items: center; gap: var(--sc-2); }
+  .figure__src img { height: 1.1rem; width: auto; border-radius: 3px; background: #fff; padding: 2px; }
+
+  .witnesses { margin-top: var(--sc-9); border-top: 1px solid color-mix(in oklab, #fff 14%, transparent); padding-top: var(--sc-6); }
+  .witnesses .sc-label { color: #8FA8BF; }
+  .witness-row { display: flex; flex-wrap: wrap; align-items: center; gap: clamp(1.5rem, 4vw, 3.5rem); margin-top: var(--sc-5); }
+  .witness-row img { height: clamp(1.6rem, 3vw, 2.3rem); width: auto; filter: saturate(0.2) brightness(1.4); opacity: 0.85; }
+  .witness-row img.pad { background: #fff; padding: 5px 8px; border-radius: 4px; filter: none; opacity: 1; }
+
+  /* ---------- range: the project rail (pan) ------------------------------ */
+  .rail { display: flex; gap: clamp(1.5rem, 3vw, 2.5rem); align-items: stretch; padding-inline: clamp(1.5rem, 4vw, 4.5rem); }
+  .rail__lead { flex: 0 0 auto; width: clamp(14rem, 24vw, 22rem); display: flex; flex-direction: column; justify-content: center; }
+  .rail__lead h3 { font-family: var(--sc-font-display); font-weight: 400; font-size: var(--sc-t-2xl); margin: 0 0 var(--sc-4); line-height: 1.04; }
+  .rail__lead p { color: var(--sc-ink-soft); max-width: 30ch; margin: 0; }
+  .work { flex: 0 0 auto; width: clamp(16rem, 26vw, 23rem); background: var(--sc-surface); border: 1px solid var(--sc-hairline); border-radius: var(--sc-r-md); overflow: hidden; display: flex; flex-direction: column; box-shadow: var(--sc-e1); }
+  .work img { width: 100%; height: 11rem; object-fit: cover; border-bottom: 1px solid var(--sc-hairline); }
+  .work__body { padding: var(--sc-5); display: flex; flex-direction: column; gap: var(--sc-3); flex: 1; }
+  .work__no { font-family: var(--sc-font-mono); font-size: var(--sc-t-xs); letter-spacing: var(--sc-track-wide); color: var(--sc-accent); }
+  .work__body h4 { font-family: var(--sc-font-display); font-weight: 500; font-size: var(--sc-t-lg); margin: 0; line-height: 1.1; }
+  .work__body p { font-size: var(--sc-t-sm); line-height: 1.55; color: var(--sc-ink-soft); margin: 0; flex: 1; }
+  .work__link { font-family: var(--sc-font-mono); font-size: var(--sc-t-xs); letter-spacing: var(--sc-track-wide); text-transform: uppercase; color: var(--sc-ink); text-decoration: none; display: inline-flex; align-items: center; gap: var(--sc-2); border-bottom: 1px solid var(--sc-hairline-strong); padding-bottom: 2px; width: fit-content; transition: color var(--sc-d-fast) var(--sc-ease-out), border-color var(--sc-d-fast) var(--sc-ease-out); }
+  @media (hover:hover){ .work__link:hover { color: var(--sc-accent); border-color: var(--sc-accent); } }
+
+  /* ---------- the colophon close ----------------------------------------- */
+  .colophon { background: var(--paper); }
+  .colophon__inner { min-height: 100vh; min-height: 100svh; display: flex; flex-direction: column; justify-content: center; padding-block: var(--sc-9); }
+  .colophon h2 { font-family: var(--sc-font-display); font-weight: 400; font-size: var(--sc-t-3xl); line-height: 1.02; letter-spacing: var(--sc-track-snug); margin: 0; max-width: 24ch; text-wrap: balance; }
+  .colophon h2 em { font-style: italic; }
+  .colophon .running { font-size: var(--sc-t-lg); line-height: 1.6; color: var(--sc-ink); max-width: 46ch; margin: var(--sc-6) 0 0; text-wrap: pretty; }
+  .colophon .running a { color: var(--sc-accent); text-decoration-thickness: 1px; text-underline-offset: 0.22em; font-style: italic; font-weight: 500; transition: color var(--sc-d-fast) var(--sc-ease-out); }
+  @media (hover:hover){ .colophon .running a:hover { color: var(--sc-ink); } }
+  .masthead { margin-top: var(--sc-9); padding-top: var(--sc-6); border-top: 1px solid var(--sc-hairline-strong); display: flex; flex-wrap: wrap; justify-content: space-between; gap: var(--sc-4); font-family: var(--sc-font-mono); font-size: var(--sc-t-xs); letter-spacing: var(--sc-track-snug); text-transform: uppercase; color: var(--sc-ink-soft); }
+  .masthead b { color: var(--sc-ink); font-weight: 500; }
+
+  /* ---------- mobile: fold the folio to a slim top band, ledger to a tally */
+  @media (max-width: 900px) {
+    .leaf { margin-left: 0; }
+    .folio {
+      position: sticky; top: 0; left: 0; width: 100%; height: auto;
+      flex-direction: row; align-items: center; justify-content: space-between;
+      gap: var(--sc-4); padding: var(--sc-3) var(--sc-5);
+      border-right: 0; border-bottom: 1px solid var(--sc-hairline);
+      background: color-mix(in oklab, var(--sc-canvas) 86%, transparent);
+      backdrop-filter: blur(8px);
+    }
+    body.is-dark .folio { background: color-mix(in oklab, var(--slate) 82%, transparent); border-bottom-color: color-mix(in oklab,#fff 16%, transparent); }
+    .folio__chapter { display: none; }
+    .ledger { margin-top: 0; flex-direction: row; align-items: center; gap: var(--sc-3); }
+    .ledger__head, .ledger__item { display: none; }
+    .ledger__tally { display: inline-flex; align-items: baseline; gap: var(--sc-2); font-family: var(--sc-font-mono); font-size: var(--sc-t-xs); letter-spacing: var(--sc-track-snug); color: var(--sc-ink-soft); }
+    .ledger__tally b { color: var(--sc-accent); font-size: var(--sc-t-sm); }
+    body.is-dark .ledger__tally { color: #B8B1A4; }
+    body.is-dark .ledger__tally b { color: #A9D0EE; }
+    .title-page h1 { font-size: var(--sc-t-3xl); }
+  }
+</style>
+</head>
+<body>
+
+<span data-sc-progress></span>
+<div class="sc-grain" aria-hidden="true"></div>
+
+<!-- editorial chrome: the folio, and the verification ledger (signature move) -->
+<header class="folio" aria-label="Contents and verification record">
+  <div class="folio__mark">Siew Sheng Yao<span>Data analyst</span></div>
+  <div class="folio__chapter" aria-hidden="true">Chapter <b data-chapter-title>Title page</b></div>
+  <div class="ledger" id="ledger" aria-label="Claims verified as you read">
+    <div class="ledger__head">Verified as you read</div>
+    <div class="ledger__item" data-claim="pl300"><span class="ledger__check">✓</span><span><b>PL-300</b>Microsoft certified</span></div>
+    <div class="ledger__item" data-claim="firstclass"><span class="ledger__check">✓</span><span><b>First-Class Honours</b>APU, Data Analytics</span></div>
+    <div class="ledger__item" data-claim="hours"><span class="ledger__check">✓</span><span><b>750 hrs/yr saved</b>FrieslandCampina</span></div>
+    <div class="ledger__item" data-claim="tickets"><span class="ledger__check">✓</span><span><b>58,000+ tickets</b>6 validated use cases</span></div>
+    <div class="ledger__item" data-claim="token"><span class="ledger__check">✓</span><span><b>48% lower tokens</b>AI pipeline</span></div>
+    <div class="ledger__item" data-claim="countries"><span class="ledger__check">✓</span><span><b>20+ countries</b>IT 360 dashboard</span></div>
+    <div class="ledger__tally" aria-hidden="true"><b id="tally">0</b> claims verified</div>
+  </div>
+</header>
+
+<main class="leaf" id="top">
+
+  <!-- 1 · COMPOSURE — title page. Flow act, almost still (authored silence). -->
+  <section class="sc-section" data-sc-act="flow" data-chapter="Title page">
+    <div class="sc-wrap title-page">
+      <div class="sc-stack" data-sc-in data-sc-stagger="90">
+        <p class="kicker">A portfolio, verified</p>
+        <h1>I make the numbers<br><em>answer back.</em></h1>
+        <p class="promise">Microsoft Certified Power BI Data Analyst. I turn messy operational data into reporting people actually trust, and I can show you the receipts.</p>
+        <div class="credits">
+          <span><b>Siew Sheng Yao</b></span>
+          <span>Kuala Lumpur, Malaysia</span>
+          <span>Available <b>March 2027</b></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2 · CREDENCE — who he is. Intertitle plate, then an asymmetric spread. -->
+  <section class="intertitle" data-sc-act="flow" data-chapter="I · Who">
+    <div class="sc-wrap">
+      <div data-sc-in data-sc-stagger="70">
+        <span class="no">Chapter I</span>
+        <h2>The facts a hiring manager <em>screens on</em>, stated plainly.</h2>
+      </div>
+    </div>
+  </section>
+
+  <section class="spread" data-sc-act="flow" data-chapter="I · Who">
+    <div class="sc-wrap">
+      <div class="spread__grid flip">
+        <figure class="plate portrait" data-sc-reveal="up" data-sc-reveal-at="0.12 0.55">
+          <img src="assets/perfil.png" width="900" height="1125" alt="Portrait of Siew Sheng Yao">
+          <figcaption>Siew Sheng Yao. Bukit Jalil, Kuala Lumpur.</figcaption>
+        </figure>
+        <div class="spread__text" data-sc-in data-sc-stagger="70">
+          <h3>A data analyst who finishes the job, then measures it.</h3>
+          <p class="drop">A Microsoft Certified Power BI Data Analyst (PL-300) reading Computer Science (Data Analytics) at Asia Pacific University on a First-Class Honours track, graduating April 2027. I have spent the last two years inside a real reporting function, not a classroom exercise.</p>
+          <p class="sub">I am looking for Data Analyst, BI Analyst, Data Engineer, and graduate-programme roles, available full-time from March 2027. The chapters that follow are the evidence, not the pitch.</p>
+          <dl class="facts">
+            <div><dt>Certification</dt><dd>Microsoft PL-300</dd></div>
+            <div><dt>Degree</dt><dd>First-Class track</dd></div>
+            <div><dt>Current</dt><dd>FrieslandCampina</dd></div>
+            <div><dt>Languages</dt><dd>EN · 中文 · BM</dd></div>
+          </dl>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3 · CONVICTION — the turn. Reveal: a claim becomes a measured fact. -->
+  <section class="intertitle" data-sc-act="flow" data-chapter="II · The turn">
+    <div class="sc-wrap">
+      <div data-sc-in data-sc-stagger="70">
+        <span class="no">Chapter II</span>
+        <h2>Anyone can say <em>data-driven.</em> The difference is a number you can check.</h2>
+      </div>
+    </div>
+  </section>
+
+  <section class="spread" data-sc-act="flow" data-chapter="II · The turn">
+    <div class="sc-wrap">
+      <div class="spread__grid">
+        <div class="spread__text" data-sc-in data-sc-stagger="70">
+          <h3>Three services, each tied to something I actually shipped.</h3>
+          <p class="drop">Data analysis and insight: I clean, validate and analyse business data in Python, SQL and Excel, and translate what stakeholders ask for into decisions they can act on.</p>
+          <p>Power BI and reporting: interactive dashboards built on DAX, Power Query and proper data modelling, replacing the manual workbooks that quietly eat a team's week.</p>
+          <p class="sub">AI and automation: machine learning and NLP applied to real operational text, with the pipeline tuned so it is cheap enough to run, not just a demo.</p>
+        </div>
+        <figure class="plate" data-sc-reveal="left" data-sc-reveal-at="0.14 0.58">
+          <img src="assets/about.jpg" width="1200" height="800" alt="Working at a desk on analysis">
+          <figcaption>The work, mid-flight. Reporting that gets used.</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4 · ASSURANCE — THE PEAK. Dark slate ground, figures count up, logos witness. -->
+  <section class="ledger-chapter" data-sc-act="flow" data-chapter="III · The proof" data-dark>
+    <div class="intertitle">
+      <div class="sc-wrap">
+        <div data-sc-in data-sc-stagger="70">
+          <span class="no" style="color:#A9D0EE">Chapter III</span>
+          <h2 style="color:#F2ECE0">The receipts, <em>counted out.</em></h2>
+        </div>
+      </div>
+    </div>
+
+    <div class="spread">
+      <div class="sc-wrap">
+        <div class="figures">
+          <div class="figure" data-sc-in data-claim="hours">
+            <div class="figure__num"><span data-sc-count="0 750">0</span><span class="unit">hrs / yr</span></div>
+            <div class="figure__body">
+              <h4>Reporting I automated, saving roughly 750 hours a year</h4>
+              <p>Power BI pipelines that replaced manual reporting at FrieslandCampina's Service Centre Asia Pacific. Time a team no longer spends rebuilding the same workbook.</p>
+              <div class="figure__src"><img src="assets/frieslandcampina.jpg" alt="">FrieslandCampina · 2025</div>
+            </div>
+          </div>
+
+          <div class="figure" data-sc-in data-claim="tickets">
+            <div class="figure__num"><span data-sc-count="0 58,000">0</span><span class="unit">+ tickets</span></div>
+            <div class="figure__body">
+              <h4>IT tickets analysed with NLP to find real automation</h4>
+              <p>Machine learning and BERTopic across 58,000+ support tickets, producing 6 validated automation use cases and an estimated 5.93% potential reduction in volume.</p>
+              <div class="figure__src"><img src="assets/frieslandcampina.jpg" alt="">FrieslandCampina · 6 validated use cases</div>
+            </div>
+          </div>
+
+          <div class="figure" data-sc-in data-claim="token">
+            <div class="figure__num"><span data-sc-count="0 48">0</span><span class="unit">% lower</span></div>
+            <div class="figure__body">
+              <h4>Token usage cut on the AI pipeline</h4>
+              <p>The same analysis, tuned to run at 48% lower token cost. The difference between a model that looks clever in a slide and one that is cheap enough to keep running.</p>
+              <div class="figure__src"><img src="assets/frieslandcampina.jpg" alt="">FrieslandCampina · AI pipeline</div>
+            </div>
+          </div>
+
+          <div class="figure" data-sc-in data-claim="countries">
+            <div class="figure__num"><span data-sc-count="0 20">0</span><span class="unit">+ countries</span></div>
+            <div class="figure__body">
+              <h4>Supported by one IT 360 dashboard</h4>
+              <p>A financial and operational dashboard serving 10+ cluster heads and supporting more than 20 countries, built to hold up under that spread.</p>
+              <div class="figure__src"><img src="assets/frieslandcampina.jpg" alt="">FrieslandCampina · IT 360</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="witnesses" data-sc-in data-sc-stagger="60">
+          <p class="sc-label">Verified by</p>
+          <div class="witness-row">
+            <img class="pad" src="assets/microsoft.png" alt="Microsoft, PL-300 certification">
+            <img class="pad" src="assets/aws.png" alt="AWS Academy">
+            <img class="pad" src="assets/google.png" alt="Google Analytics certification">
+            <img class="pad" src="assets/apu.jpg" alt="Asia Pacific University">
+            <img class="pad" src="assets/pwc.webp" alt="PwC guest lecture">
+            <img class="pad" src="assets/postman.png" alt="Postman Student Expert">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5 · CURIOSITY — the range, walked sideways. Pan act. -->
+  <section class="intertitle" data-sc-act="flow" data-chapter="IV · The range">
+    <div class="sc-wrap">
+      <div data-sc-in data-sc-stagger="70">
+        <span class="no">Chapter IV</span>
+        <h2>Beyond the dashboards, <em>a body of work.</em></h2>
+      </div>
+    </div>
+  </section>
+
+  <section data-sc-act="pan" data-sc-span="5.5" data-chapter="IV · The range">
+    <div data-sc-stage>
+      <div class="rail" data-sc-pan="0.04">
+        <div class="rail__lead">
+          <h3>Six things I built, shipped and can still show you running.</h3>
+          <p>Live sites, an AI chatbot, a full-stack store. Each one links to the real thing, not a screenshot.</p>
+        </div>
+        <article class="work"><img src="assets/portfolio5.jpg" alt="KLT website"><div class="work__body"><span class="work__no">Work 01</span><h4>KLT Website</h4><p>A responsive corporate site with clean navigation and a modern build.</p><a class="work__link" href="https://www.klt.com.my/" target="_blank" rel="noopener">View live →</a></div></article>
+        <article class="work"><img src="assets/portfolio6.jpg" alt="Artivo education platform"><div class="work__body"><span class="work__no">Work 02</span><h4>Artivo</h4><p>An education platform with interactive tools and learning resources.</p><a class="work__link" href="https://edu-artivo.com/en/" target="_blank" rel="noopener">View live →</a></div></article>
+        <article class="work"><img src="assets/portfolio1.jpg" alt="AI chatbot"><div class="work__body"><span class="work__no">Work 03</span><h4>AI Chatbot</h4><p>Built in Python with spaCy, Discord and Streamlit.</p><a class="work__link" href="https://iai-chatbot-15.streamlit.app/" target="_blank" rel="noopener">Open demo →</a></div></article>
+        <article class="work"><img src="assets/portfolio2.jpg" alt="Grocery website"><div class="work__body"><span class="work__no">Work 04</span><h4>Grocery Store</h4><p>Full-stack build on PHP, SQL and WampServer.</p><a class="work__link" href="https://www.youtube.com/watch?v=acIB2kOPO2M" target="_blank" rel="noopener">Watch demo →</a></div></article>
+        <article class="work"><img src="assets/portfolio3.jpg" alt="Digital name card"><div class="work__body"><span class="work__no">Work 05</span><h4>Digital Name Card</h4><p>Contact details shared instantly over QR, zero paper.</p><a class="work__link" href="https://weycang.my.canva.site/" target="_blank" rel="noopener">View live →</a></div></article>
+        <article class="work"><img src="assets/portfolio4.jpg" alt="IPS Skin website"><div class="work__body"><span class="work__no">Work 06</span><h4>IPS Skin</h4><p>Skincare services, bookings and an online shop.</p><a class="work__link" href="https://ibeautynew.demo.com.my/en/" target="_blank" rel="noopener">View live →</a></div></article>
+        <div class="rail__lead" aria-hidden="false"><p style="color:var(--sc-ink-soft)">The rest is on GitHub, and in the conversation I would rather be having with you.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6 · TRUST — the colophon. CTA as running text, email + LinkedIn. -->
+  <section class="colophon" data-sc-act="flow" data-chapter="Colophon">
+    <div class="sc-wrap">
+      <div class="colophon__inner" data-sc-in data-sc-stagger="80">
+        <h2>If the receipts held up, <em>let's talk.</em></h2>
+        <p class="running">I am open to Data Analyst, BI Analyst, Data Engineer and graduate roles from March 2027. The quickest way to reach me is a short note to <a href="mailto:shengyao330@gmail.com">shengyao330@gmail.com</a>, or a message on <a href="https://www.linkedin.com/in/sheng-yao-siew-a02716278/" target="_blank" rel="noopener">LinkedIn</a>. I read both, and I reply.</p>
+        <div class="masthead">
+          <span><b>Siew Sheng Yao</b> · Data analyst</span>
+          <span>Kuala Lumpur · <b>Available March 2027</b></span>
+          <span>EN · 中文 · BM</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<script src="scrollcraft.js"></script>
+<script>
+  ScrollCraft.mount(document.body);
+
+  /* ---- Signature move: the verification ledger -------------------------- *
+   * Each chapter owns a set of claims. As its section crosses into the upper
+   * half of the viewport, those claims log into the margin rail with a check
+   * and stay logged. The folio chapter label updates to the current section.
+   * Real figures only. Pointer/scroll driven, engine untouched.             */
+  (function () {
+    const ledgerItems = Array.from(document.querySelectorAll('.ledger__item'));
+    const tally = document.getElementById('tally');
+    const chapterLabel = document.querySelector('[data-chapter-title]');
+    const sections = Array.from(document.querySelectorAll('[data-chapter]'));
+    const logged = new Set();
+
+    // which claims a section unlocks when it is read
+    const unlocks = {
+      'I · Who':       ['pl300', 'firstclass'],
+      'III · The proof': ['hours', 'tickets', 'token', 'countries'],
+    };
+
+    function logClaim(id) {
+      if (logged.has(id)) return;
+      const el = ledgerItems.find(i => i.dataset.claim === id);
+      if (!el) return;
+      logged.add(id);
+      el.classList.add('is-logged');
+      if (tally) tally.textContent = String(logged.size);
+    }
+
+    const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduce) {
+      // settled state: everything already verified, no animation surprise
+      ledgerItems.forEach(i => logClaim(i.dataset.claim));
+    }
+
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (!e.isIntersecting) return;
+        const name = e.target.getAttribute('data-chapter');
+        if (chapterLabel && name) chapterLabel.textContent = name;
+        if (e.target.hasAttribute('data-dark')) document.body.classList.add('is-dark');
+        (unlocks[name] || []).forEach(logClaim);
+      });
+    }, { rootMargin: '-30% 0px -55% 0px', threshold: 0 });
+    sections.forEach(s => io.observe(s));
+
+    // leave the dark chapter: restore paper chrome
+    const darkSection = document.querySelector('[data-dark]');
+    if (darkSection) {
+      const darkIo = new IntersectionObserver((entries) => {
+        entries.forEach((e) => {
+          document.body.classList.toggle('is-dark', e.isIntersecting && e.intersectionRatio > 0.12);
+        });
+      }, { threshold: [0, 0.12, 0.5] });
+      darkIo.observe(darkSection);
+    }
+  })();
+</script>
+</body>
+</html>

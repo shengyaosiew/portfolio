@@ -1,0 +1,843 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Siew Sheng Yao · Data Analyst (Power BI, SQL, Python)</title>
+<meta name="description" content="Microsoft Certified Power BI Data Analyst. Automated reporting, NLP ticket analysis and AI pipelines at FrieslandCampina, shown as charts. Available full-time from March 2027.">
+<meta property="og:title" content="Siew Sheng Yao · Data Analyst">
+<meta property="og:description" content="A portfolio where every claim is a chart drawn from real results.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='4' fill='%23121316'/><rect x='7' y='17' width='4' height='8' fill='%23F4F2ED'/><rect x='14' y='11' width='4' height='14' fill='%23F4F2ED'/><rect x='21' y='7' width='4' height='18' fill='%23C93A22'/></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=Newsreader:ital,opsz,wght@0,6..72,400..600;1,6..72,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="scrollcraft.css">
+<style>
+  :root {
+    --sc-canvas: #F4F2ED;  --sc-surface: #EAE7E0;
+    --sc-ink: #121316;     --sc-ink-soft: #575A61;
+    --sc-accent: #C93A22;  --sc-accent-ink: #FFFFFF;
+    --sc-font-display: "Archivo", system-ui, sans-serif;
+    --sc-font-text: "Newsreader", Georgia, serif;
+    --sc-font-mono: "Archivo", system-ui, sans-serif;
+    --sc-shadow-color: 30 10% 20%;
+    --sc-hairline: color-mix(in oklab, var(--sc-ink) 13%, transparent);
+    --sc-hairline-strong: color-mix(in oklab, var(--sc-ink) 30%, transparent);
+
+    --night: #0F1217; --night-ink: #EEECE6; --night-soft: #A3A8B1; --night-accent: #FF6B4E;
+    --head: 56px;
+    --r: 4px;
+  }
+  body { font-size: var(--sc-t-base); }
+  .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+  .label {
+    font-family: var(--sc-font-display); font-weight: 600; font-size: 0.74rem;
+    letter-spacing: 0.09em; text-transform: uppercase; color: var(--sc-ink-soft);
+  }
+  .h-display {
+    font-family: var(--sc-font-display); font-weight: 750; font-stretch: 82%;
+    letter-spacing: -0.03em; line-height: 0.98; margin: 0; text-wrap: balance;
+  }
+  .h-xl { font-size: clamp(2.4rem, 1.4rem + 4.2vw, 5.2rem); }
+  .h-lg { font-size: clamp(2rem, 1.3rem + 3vw, 4rem); }
+  .h-md { font-size: clamp(1.5rem, 1.1rem + 1.6vw, 2.4rem); letter-spacing: -0.02em; }
+  .prose { font-size: var(--sc-t-lg); line-height: 1.5; max-width: 40ch; margin: 0; text-wrap: pretty; }
+  .prose--soft { color: var(--sc-ink-soft); }
+  .source {
+    font-family: var(--sc-font-display); font-size: 0.78rem; line-height: 1.5;
+    color: var(--sc-ink-soft); margin: var(--sc-5) 0 0; max-width: 64ch;
+    padding-top: var(--sc-3); border-top: 1px solid var(--sc-hairline);
+  }
+  .source b { color: var(--sc-ink); font-weight: 650; }
+
+  /* ----------------------------------------------------------- buttons --- */
+  .btn {
+    display: inline-flex; align-items: center; gap: 0.55em; white-space: nowrap;
+    font-family: var(--sc-font-display); font-weight: 650; font-size: 0.95rem; letter-spacing: 0.005em;
+    padding: 0.85em 1.25em; border-radius: var(--r); text-decoration: none; cursor: pointer;
+    border: 1px solid var(--sc-ink); background: var(--sc-ink); color: var(--sc-canvas);
+    transition: background-color 160ms var(--sc-ease-out), border-color 160ms var(--sc-ease-out), color 160ms var(--sc-ease-out), transform 120ms var(--sc-ease-out);
+  }
+  .btn--ghost { background: transparent; color: var(--sc-ink); border-color: var(--sc-hairline-strong); }
+  .btn:active { transform: scale(0.97); }
+  @media (hover: hover) and (pointer: fine) {
+    .btn:hover { background: var(--sc-accent); border-color: var(--sc-accent); color: #fff; }
+    .btn--ghost:hover { background: transparent; color: var(--sc-accent); border-color: var(--sc-accent); }
+  }
+
+  /* ------------------------------------------------------- running head --- */
+  .runhead {
+    position: fixed; inset: 0 0 auto 0; height: var(--head); z-index: 70;
+    display: grid; grid-template-columns: 1fr auto 1fr; align-items: center;
+    padding-inline: var(--sc-gutter);
+    background: color-mix(in oklab, var(--sc-canvas) 92%, transparent);
+    border-bottom: 1px solid var(--sc-hairline);
+    backdrop-filter: saturate(1.2) blur(10px);
+    transition: background-color 300ms var(--sc-ease-out), color 300ms var(--sc-ease-out), border-color 300ms var(--sc-ease-out);
+  }
+  .runhead__name { font-family: var(--sc-font-display); font-weight: 750; font-stretch: 85%; font-size: 1rem; letter-spacing: -0.01em; text-decoration: none; justify-self: start; }
+  .runhead__where { font-family: var(--sc-font-display); font-weight: 600; font-size: 0.74rem; letter-spacing: 0.09em; text-transform: uppercase; color: var(--sc-ink-soft); }
+  .runhead__cta { justify-self: end; font-family: var(--sc-font-display); font-weight: 650; font-size: 0.9rem; text-decoration: none; padding: 0.5em 0.9em; border-radius: var(--r); background: var(--sc-ink); color: var(--sc-canvas); transition: background-color 160ms var(--sc-ease-out); }
+  @media (hover: hover) and (pointer: fine) { .runhead__cta:hover { background: var(--sc-accent); color: #fff; } }
+  body.on-dark .runhead { background: color-mix(in oklab, var(--night) 88%, transparent); color: var(--night-ink); border-bottom-color: color-mix(in oklab, #fff 12%, transparent); }
+  body.on-dark .runhead__where { color: var(--night-soft); }
+  body.on-dark .runhead__cta { background: var(--night-ink); color: var(--night); }
+
+  /* ================================================== 1 · COVER (hero) === */
+  .cover { background: var(--sc-canvas); --ph: min(68svh, 560px); --ns: clamp(5rem, 18vw, 19rem); }
+  .cover__scene { position: absolute; inset: 0; }
+  .cover__dots {
+    position: absolute; inset: var(--head) 0 0 0; opacity: 0.16;
+    background-image: radial-gradient(circle, var(--sc-ink) 1.1px, transparent 1.5px);
+    background-size: 18px 18px;
+    -webkit-mask-image: radial-gradient(60% 70% at 62% 60%, #000 0%, transparent 75%);
+            mask-image: radial-gradient(60% 70% at 62% 60%, #000 0%, transparent 75%);
+  }
+  .cover__name {
+    position: absolute; left: 50%; top: calc(100svh - var(--ph) - var(--ns) * 0.42);
+    margin: 0; white-space: nowrap; color: var(--sc-accent);
+    font-family: var(--sc-font-display); font-weight: 820; font-stretch: 70%;
+    font-size: var(--ns); line-height: 0.82; letter-spacing: -0.045em; text-transform: uppercase;
+    transform: translate3d(-50%, 0, 0); transform-origin: 50% 100%;
+  }
+  .cover__name span { display: inline; }
+  .cover__portrait {
+    position: absolute; bottom: 0; left: calc(62% - var(--ph) / 2);
+    width: var(--ph); height: var(--ph); max-width: none; object-fit: contain;
+    transform-origin: 50% 100%;
+    filter: drop-shadow(0 18px 30px hsl(30 10% 20% / 0.18));
+  }
+  .cover__floor { position: absolute; inset: auto 0 0 0; height: 16svh; background: linear-gradient(to top, var(--sc-canvas) 8%, transparent); pointer-events: none; }
+  .cover__copy { position: absolute; z-index: 5; left: var(--sc-gutter); bottom: 10svh; max-width: min(27rem, 34vw); }
+  .cover__copy h1 { font-size: clamp(1.9rem, 1.2rem + 1.9vw, 3rem); }
+  .cover__copy .prose { font-size: var(--sc-t-base); margin-top: var(--sc-4); color: var(--sc-ink-soft); }
+  .cover__actions { display: flex; flex-wrap: wrap; gap: var(--sc-3); margin-top: var(--sc-5); }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .cover__dots { transform: translate3d(calc(var(--mx, 0) * -5px), calc(var(--sc-p, 0) * -28px), 0); }
+    .cover__name {
+      transform: translate3d(calc(-50% + var(--mx, 0) * -16px), calc(var(--sc-p, 0) * -80px + var(--my, 0) * -8px), 0)
+                 scale(calc(1 - var(--sc-p, 0) * 0.08));
+      opacity: calc(1 - var(--sc-p, 0) * 0.5);
+    }
+    .cover__portrait { transform: translate3d(calc(var(--mx, 0) * 7px), 0, 0) scale(calc(1 + var(--sc-p, 0) * 0.05)); }
+  }
+
+  /* ============================================== shared section frame === */
+  .sect { padding-block: clamp(5rem, 10vw, 9rem); }
+  .sect__grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: clamp(2rem, 5vw, 5rem); }
+  @media (min-width: 980px) { .sect__grid { grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); align-items: start; } }
+
+  /* =============================================== 2 · PROFILE ========== */
+  .profile .statement { font-size: clamp(1.45rem, 1.1rem + 1.25vw, 2.2rem); line-height: 1.32; letter-spacing: -0.01em; margin: 0; text-wrap: pretty; }
+  .profile .statement em { font-style: italic; color: var(--sc-accent); }
+  .facts { display: grid; grid-template-columns: 9rem 1fr; gap: var(--sc-3) var(--sc-5); margin: var(--sc-7) 0 0; padding-top: var(--sc-5); border-top: 1px solid var(--sc-hairline-strong); }
+  .facts dt { padding-top: 0.2em; }
+  .facts dd { margin: 0; font-size: var(--sc-t-base); }
+  .certs { display: flex; flex-wrap: wrap; gap: var(--sc-4) var(--sc-6); margin-top: var(--sc-7); }
+  .cert { display: flex; align-items: center; gap: var(--sc-3); font-family: var(--sc-font-display); font-size: 0.86rem; font-weight: 550; line-height: 1.25; }
+  .cert img { width: 34px; height: 34px; object-fit: contain; background: #fff; border: 1px solid var(--sc-hairline); border-radius: var(--r); padding: 4px; }
+  .cert small { display: block; color: var(--sc-ink-soft); font-weight: 450; }
+
+  /* =========================================== 3 · EXHIBIT 1 (hours) ==== */
+  .ex1 { background: #ECE9E2; }
+  .bigfig { display: flex; align-items: baseline; gap: var(--sc-3); font-family: var(--sc-font-display); font-weight: 780; font-stretch: 75%; letter-spacing: -0.04em; line-height: 0.85; }
+  .bigfig .n { font-size: clamp(4.5rem, 2.5rem + 8vw, 9.5rem); font-variant-numeric: tabular-nums; }
+  .bigfig .bigfig__u { font-size: clamp(1.1rem, 0.9rem + 0.8vw, 1.6rem); font-weight: 600; letter-spacing: -0.01em; color: var(--sc-ink-soft); font-stretch: 90%; }
+  .ex1 .prose { margin-top: var(--sc-5); }
+  .chart-title { font-family: var(--sc-font-display); font-weight: 650; font-size: 1.05rem; margin: 0 0 var(--sc-2); }
+  .chart-sub { margin: 0 0 var(--sc-5); color: var(--sc-ink-soft); font-size: 0.98rem; }
+  .days-wrap { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: var(--sc-3); }
+  .days-rows { display: grid; grid-template-rows: repeat(5, 1fr); gap: 5px; }
+  .days-rows span { font-family: var(--sc-font-display); font-size: 0.7rem; color: var(--sc-ink-soft); display: flex; align-items: center; }
+  .days { display: grid; grid-template-rows: repeat(5, auto); grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); gap: 5px; }
+  .d { aspect-ratio: 1; border-radius: 2px; background: color-mix(in oklab, var(--sc-ink) 8%, transparent); position: relative; }
+  .d::after {
+    content: ""; position: absolute; inset: 0; border-radius: 2px; background: var(--sc-accent);
+    opacity: clamp(0, calc((var(--sc-p, 1) - 0.2 - var(--i) * 0.34) * 28), 1);
+    transform: scale(clamp(0.55, calc(0.55 + (var(--sc-p, 1) - 0.2 - var(--i) * 0.34) * 14), 1));
+  }
+  .d--empty { background: transparent; outline: 1px dashed var(--sc-hairline-strong); outline-offset: -1px; }
+  .d--empty::after { display: none; }
+  .days-axis { grid-column: 2; display: flex; justify-content: space-between; font-family: var(--sc-font-display); font-size: 0.7rem; color: var(--sc-ink-soft); margin-top: var(--sc-2); }
+
+  /* ================================================ 4 · EXHIBIT 2 PEAK == */
+  .peak { background: var(--night); color: var(--night-ink); --sc-ink-soft: var(--night-soft); }
+  .peak .peak__stage {
+    background: var(--night);
+    display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 7fr); gap: clamp(1.5rem, 4vw, 4rem);
+    padding: calc(var(--head) + 4vh) var(--sc-gutter) 3vh;
+  }
+  .peak__copy { position: relative; align-self: center; min-height: 22rem; }
+  .peak__cue { position: absolute; inset: 0 0 auto 0; }
+  .peak__cue .h-display { color: var(--night-ink); }
+  .peak__cue .prose { color: var(--night-soft); margin-top: var(--sc-5); font-size: var(--sc-t-base); max-width: 36ch; }
+  .peak__cue .accent { color: var(--night-accent); }
+  .peak__chart { position: relative; display: flex; flex-direction: column; min-height: 0; }
+  .legend { display: flex; flex-wrap: wrap; gap: var(--sc-2) var(--sc-5); font-family: var(--sc-font-display); font-size: 0.8rem; color: var(--night-soft); margin-bottom: var(--sc-3); }
+  .legend i { display: inline-block; width: 9px; height: 9px; border-radius: 50%; margin-right: 0.5em; vertical-align: 0.05em; background: #6A707A; }
+  .legend i.on { background: var(--night-accent); }
+  .legend i.ring { background: transparent; border: 1.5px solid var(--night-accent); }
+  .field { position: relative; flex: 1; min-height: 0; }
+  .field canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
+  .tray-label { position: absolute; pointer-events: none; font-family: var(--sc-font-display); color: var(--night-ink); opacity: 0; border-left: 2px solid var(--night-accent); padding-left: var(--sc-3); }
+  .tray-label b { display: block; font-size: clamp(1.6rem, 1rem + 1.6vw, 2.6rem); font-weight: 780; font-stretch: 80%; letter-spacing: -0.03em; line-height: 1; color: var(--night-accent); }
+  .tray-label span { font-size: 0.82rem; color: var(--night-soft); }
+  .peak .source { color: var(--night-soft); border-top-color: color-mix(in oklab, #fff 14%, transparent); margin-top: var(--sc-3); }
+  .peak .source b { color: var(--night-ink); }
+
+  /* ============================================== 5 · EXHIBIT 3 reach === */
+  .ex3 { padding-top: clamp(4rem, 7vw, 6rem); }
+  .ex3__head { max-width: 46rem; margin-bottom: clamp(2.5rem, 5vw, 4.5rem); }
+  .ex3__head .prose { margin-top: var(--sc-4); }
+  .reach { display: grid; gap: clamp(2rem, 4vw, 3.5rem); }
+  @media (min-width: 980px) { .reach { grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); } }
+  .panel { border-top: 2px solid var(--sc-ink); padding-top: var(--sc-5); }
+  .bars { display: grid; gap: var(--sc-5); margin-top: var(--sc-6); }
+  .bar-row { display: grid; grid-template-columns: 8.5rem 1fr; align-items: center; gap: var(--sc-4); }
+  .bar-track { position: relative; height: 52px; }
+  .bar { position: absolute; inset: 0 auto 0 0; border-radius: 2px; display: flex; align-items: center; justify-content: flex-end; padding-right: var(--sc-3); font-family: var(--sc-font-display); font-weight: 750; font-size: 1.15rem; font-variant-numeric: tabular-nums; }
+  .bar--before { width: 100%; background: color-mix(in oklab, var(--sc-ink) 16%, transparent); color: var(--sc-ink); }
+  .bar--after { width: 52%; background: var(--sc-accent); color: #fff; }
+  .cut { position: absolute; top: -6px; bottom: -6px; left: 52%; right: 0; border: 1.5px dashed var(--sc-accent); border-left-style: solid; border-radius: 2px; display: flex; align-items: center; justify-content: center; font-family: var(--sc-font-display); font-weight: 780; font-stretch: 80%; font-size: clamp(1.4rem, 1rem + 1.3vw, 2.2rem); color: var(--sc-accent); letter-spacing: -0.02em; }
+  .bar-axis { display: grid; grid-template-columns: 8.5rem 1fr; gap: var(--sc-4); margin-top: var(--sc-2); }
+  .bar-axis div { display: flex; justify-content: space-between; font-family: var(--sc-font-display); font-size: 0.72rem; color: var(--sc-ink-soft); border-top: 1px solid var(--sc-hairline-strong); padding-top: 4px; }
+  .panels-r { display: grid; gap: clamp(2rem, 4vw, 3rem); }
+  .units { display: flex; flex-wrap: wrap; align-items: center; gap: 7px; margin-top: var(--sc-5); max-width: 22rem; }
+  .u { width: 22px; height: 22px; border-radius: 3px; background: color-mix(in oklab, var(--sc-ink) 9%, transparent); position: relative; }
+  .u::after { content: ""; position: absolute; inset: 0; border-radius: inherit; background: var(--sc-ink); opacity: clamp(0, calc((var(--sc-p, 1) - var(--w0) - var(--i) * 0.2) * 24), 1); }
+  .u--dot { border-radius: 50%; }
+  .u--dot::after { background: var(--sc-accent); }
+  .units .plus { font-family: var(--sc-font-display); font-weight: 780; font-size: 1.4rem; margin-left: 4px; }
+  .unit-fig { font-family: var(--sc-font-display); font-weight: 780; font-stretch: 78%; font-size: clamp(2.4rem, 1.6rem + 2.6vw, 3.8rem); letter-spacing: -0.04em; line-height: 0.9; margin: var(--sc-3) 0 0; }
+  .unit-fig small { font-size: 0.36em; font-weight: 600; letter-spacing: -0.005em; color: var(--sc-ink-soft); margin-left: 0.3em; font-stretch: 95%; }
+
+  /* ============================================= 6 · TIMELINE (pan) ===== */
+  .tl { background: var(--sc-canvas); }
+  .tl .tl__stage { display: flex; align-items: center; padding-top: var(--head); }
+  .tl__rail { display: flex; align-items: center; gap: clamp(2.5rem, 5vw, 5rem); padding-inline: var(--sc-gutter); }
+  .tl__lead { flex: 0 0 auto; width: clamp(17rem, 28vw, 26rem); }
+  .tl__lead .prose { margin-top: var(--sc-4); }
+  .tl__end { flex: 0 0 auto; width: clamp(16rem, 24vw, 22rem); }
+  .tl__end p { margin: 0 0 var(--sc-5); font-size: var(--sc-t-lg); line-height: 1.4; }
+  .gantt { --months: 102; position: relative; flex: 0 0 auto; width: 2400px; height: 540px; }
+  .g-yr { position: absolute; top: 0; bottom: 34px; left: calc(var(--m) / var(--months) * 100%); border-left: 1px solid var(--sc-hairline); }
+  .g-yr span { position: absolute; bottom: -26px; left: 6px; font-family: var(--sc-font-display); font-weight: 650; font-size: 0.82rem; color: var(--sc-ink-soft); }
+  .g-row { position: absolute; left: 0; right: 0; top: calc(30px + var(--row) * 62px); height: 26px; }
+  .g-bar {
+    position: absolute; top: 0; height: 100%; border-radius: 2px;
+    left: calc(var(--s) / var(--months) * 100%);
+    width: calc((var(--e) - var(--s) + 1) / var(--months) * 100%);
+    background: var(--sc-ink); transform-origin: 0 50%;
+    --draw: clamp(0, calc((var(--sc-p, 1) + 0.42 - var(--s) / var(--months)) * 5), 1);
+    transform: scaleX(var(--draw));
+  }
+  .g-bar--edu { background: color-mix(in oklab, var(--sc-ink) 34%, transparent); }
+  .g-bar--fc { background: var(--sc-accent); }
+  .g-lab { position: absolute; bottom: 100%; margin-bottom: 5px; left: calc(var(--s) / var(--months) * 100%); white-space: nowrap; font-family: var(--sc-font-display); font-size: 0.86rem; font-weight: 650; line-height: 1.2; }
+  .g-lab small { font-weight: 450; color: var(--sc-ink-soft); margin-left: 0.5em; }
+  .g-ms { position: absolute; top: 0; left: calc(var(--m) / var(--months) * 100%); width: 12px; height: 12px; transform: translate(-50%, 7px) rotate(45deg); background: var(--sc-ink); }
+  .g-mslab { position: absolute; top: 24px; left: calc(var(--m) / var(--months) * 100%); transform: translateX(-12px); white-space: nowrap; font-family: var(--sc-font-display); font-size: 0.8rem; color: var(--sc-ink-soft); line-height: 1.35; }
+  .g-mslab b { color: var(--sc-ink); font-weight: 650; }
+  .g-mark { position: absolute; top: -6px; bottom: 34px; left: calc(var(--m) / var(--months) * 100%); border-left: 2px solid var(--sc-accent); }
+  .g-mark span { position: absolute; top: -4px; left: 8px; white-space: nowrap; font-family: var(--sc-font-display); font-weight: 700; font-size: 0.8rem; color: var(--sc-accent); letter-spacing: 0.04em; text-transform: uppercase; }
+  .g-mark--now { border-left: 1.5px dashed var(--sc-ink-soft); }
+  .g-mark--now span { color: var(--sc-ink-soft); top: -4px; left: auto; right: 8px; }
+  @media (prefers-reduced-motion: reduce) { .g-bar { transform: none; } }
+
+  /* =============================================== 7 · INDEX ============ */
+  .index-list { list-style: none; margin: 0; padding: 0; border-top: 2px solid var(--sc-ink); }
+  .index-list li { border-bottom: 1px solid var(--sc-hairline); }
+  .index-list a, .index-list .row {
+    display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.6fr) auto; gap: var(--sc-4);
+    align-items: baseline; padding: var(--sc-4) var(--sc-2); text-decoration: none;
+    transition: background-color 160ms var(--sc-ease-out);
+  }
+  .index-list .t { font-family: var(--sc-font-display); font-weight: 680; font-size: 1.12rem; letter-spacing: -0.01em; }
+  .index-list .w { color: var(--sc-ink-soft); }
+  .index-list .go { font-family: var(--sc-font-display); font-weight: 650; font-size: 0.85rem; white-space: nowrap; transition: transform 160ms var(--sc-ease-out), color 160ms var(--sc-ease-out); }
+  @media (hover: hover) and (pointer: fine) {
+    .index-list a:hover { background: var(--sc-surface); }
+    .index-list a:hover .go { transform: translateX(4px); color: var(--sc-accent); }
+  }
+  .index-block + .index-block { margin-top: clamp(3rem, 6vw, 5rem); }
+  .index-block h3 { margin: 0 0 var(--sc-4); }
+
+  /* ============================================== 8 · SIGN-OFF ========== */
+  .sign { background: var(--sc-ink); color: var(--sc-canvas); --sc-ink-soft: #A7A9AE; }
+  .sign__inner { min-height: 100svh; display: flex; flex-direction: column; justify-content: center; padding-block: calc(var(--head) + 6vh) 5vh; }
+  .sign .label { color: #A7A9AE; }
+  .sign__mail {
+    display: block; margin-top: var(--sc-5); color: var(--sc-canvas); text-decoration: none;
+    font-family: var(--sc-font-display); font-weight: 780; font-stretch: 72%;
+    font-size: clamp(2rem, 7.6vw, 7rem); line-height: 0.95; letter-spacing: -0.04em;
+    overflow-wrap: anywhere; transition: color 160ms var(--sc-ease-out);
+  }
+  .sign__mail span { color: var(--night-accent); }
+  @media (hover: hover) and (pointer: fine) { .sign__mail:hover { color: var(--night-accent); } }
+  .sign__lede { margin: var(--sc-6) 0 0; font-size: var(--sc-t-lg); color: #C9CBD0; max-width: 44ch; }
+  .sign__actions { display: flex; flex-wrap: wrap; gap: var(--sc-3); margin-top: var(--sc-6); align-items: center; }
+  .sign .btn { background: var(--sc-canvas); color: var(--sc-ink); border-color: var(--sc-canvas); }
+  .sign .btn--ghost { background: transparent; color: var(--sc-canvas); border-color: color-mix(in oklab, #fff 30%, transparent); }
+  @media (hover: hover) and (pointer: fine) {
+    .sign .btn:hover { background: var(--night-accent); border-color: var(--night-accent); color: var(--sc-ink); }
+    .sign .btn--ghost:hover { background: transparent; color: var(--night-accent); border-color: var(--night-accent); }
+  }
+  .sign :focus-visible { outline-color: var(--night-accent); }
+  .copy-status { font-family: var(--sc-font-display); font-size: 0.86rem; color: var(--night-accent); min-width: 10ch; }
+  .sign__foot { margin-top: auto; padding-top: var(--sc-8); display: flex; flex-wrap: wrap; justify-content: space-between; gap: var(--sc-3); font-family: var(--sc-font-display); font-size: 0.8rem; color: #A7A9AE; border-top: 1px solid color-mix(in oklab, #fff 14%, transparent); margin-top: var(--sc-9); }
+
+  /* ------------------------------------------------------------ tooltip -- */
+  .tip {
+    position: fixed; z-index: 90; pointer-events: none; max-width: 17rem;
+    background: var(--sc-ink); color: var(--sc-canvas); border-radius: var(--r);
+    font-family: var(--sc-font-display); font-size: 0.8rem; line-height: 1.4;
+    padding: 0.55em 0.75em; box-shadow: var(--sc-e2);
+    opacity: 0; transform: translateY(4px); transition: opacity 120ms var(--sc-ease-out), transform 120ms var(--sc-ease-out);
+  }
+  .tip.is-on { opacity: 1; transform: none; }
+  .tip b { color: #FF8A70; font-weight: 650; }
+
+  /* ===================================================== tablet/mobile === */
+  @media (max-width: 999px) {
+    .cover { --ph: min(44svh, 380px); --ns: clamp(3.2rem, 17.5vw, 9rem); }
+    .cover .sc-stage { display: flex; flex-direction: column; }
+    .cover__scene { position: relative; flex: 1 1 auto; min-height: 0; margin-top: var(--head); }
+    .cover__dots { inset: 0; }
+    .cover__name { top: max(6px, calc(100% - var(--ph) - var(--ns) * 0.5)); }
+    .days, .days-rows { gap: 3px; }
+    .tray-label { max-width: 10rem; }
+    .tray-label span { display: block; line-height: 1.35; margin-top: 4px; }
+    .cover__portrait { left: calc(50% - var(--ph) / 2); }
+    .cover__floor { height: 12%; }
+    .cover__copy { position: relative; left: auto; bottom: auto; max-width: none; padding: var(--sc-4) var(--sc-gutter) max(var(--sc-6), 3svh); background: var(--sc-canvas); }
+    .cover__copy h1 { font-size: clamp(1.6rem, 1.1rem + 2.6vw, 2.4rem); }
+    .cover__copy .prose { margin-top: var(--sc-3); font-size: 0.98rem; }
+    .cover__actions { margin-top: var(--sc-4); }
+
+    .peak .peak__stage { grid-template-columns: 1fr; grid-template-rows: auto minmax(0, 1fr) auto; gap: var(--sc-3); padding: calc(var(--head) + 2vh) var(--sc-gutter) 2vh; }
+    .peak__copy { min-height: 12.5rem; align-self: start; }
+    .peak__cue .h-display { font-size: clamp(1.5rem, 1.1rem + 2.4vw, 2.3rem); }
+    .peak__cue .prose { margin-top: var(--sc-3); font-size: 0.95rem; }
+    .runhead__where { display: none; }
+    .runhead { grid-template-columns: 1fr auto; }
+    .gantt { width: 1700px; }
+  }
+  @media (max-width: 560px) {
+    .facts { grid-template-columns: 1fr; gap: var(--sc-1); }
+    .facts dd { margin-bottom: var(--sc-3); }
+    .bar-row, .bar-axis { grid-template-columns: 5.5rem 1fr; }
+    .index-list a, .index-list .row { grid-template-columns: 1fr auto; }
+    .index-list .w { grid-column: 1 / -1; grid-row: 2; font-size: 0.95rem; }
+    .peak .source { font-size: 0.7rem; }
+  }
+  @media (max-height: 700px) and (max-width: 999px) {
+    .peak__copy { min-height: 10.5rem; }
+    .peak__cue .prose { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<header class="runhead">
+  <a class="runhead__name" href="#top">Siew Sheng Yao</a>
+  <span class="runhead__where" id="where">Cover</span>
+  <a class="runhead__cta" href="mailto:shengyao330@gmail.com">Email me</a>
+</header>
+
+<main id="top">
+
+  <!-- 1 · COVER. Layered: dot field (far), masthead name (mid), portrait (subject), floor fade (near), copy (front). -->
+  <section class="cover" data-sc-act="pin" data-sc-span="1.7" data-label="Cover">
+    <div data-sc-stage id="cover-stage">
+      <div class="cover__scene" aria-hidden="true">
+        <div class="cover__dots"></div>
+        <p class="cover__name"><span>Sheng</span> <span>Yao</span></p>
+        <img class="cover__portrait" src="assets/perfil.png" width="500" height="500" alt="">
+        <div class="cover__floor"></div>
+      </div>
+      <div class="cover__copy">
+        <h1 class="h-display"><span class="sr-only">Siew Sheng Yao, data analyst. </span>Reporting people trust, built from messy data.</h1>
+        <p class="prose">Microsoft Certified Power BI Data Analyst. Automating reporting at FrieslandCampina since 2025. Available full-time from March 2027.</p>
+        <div class="cover__actions">
+          <a class="btn" href="mailto:shengyao330@gmail.com">Email me</a>
+          <a class="btn btn--ghost" href="assets/resume-siew-sheng-yao.pdf" download>Download CV</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2 · PROFILE -->
+  <section class="sect profile" data-sc-act="flow" data-label="Profile">
+    <div class="sc-wrap sect__grid">
+      <div data-sc-in>
+        <p class="label">The short version</p>
+        <h2 class="h-display h-lg" style="margin-top:var(--sc-4)">An analyst who ships, then measures it.</h2>
+      </div>
+      <div data-sc-in data-sc-stagger="70">
+        <p class="statement">I'm a Microsoft Certified Power BI Data Analyst (PL-300) finishing a Data Analytics degree at Asia Pacific University with <em>First-Class Honours</em>. Since July 2025 I've worked at FrieslandCampina's Service Centre Asia Pacific, building the reporting, NLP analysis and AI pipelines charted below.</p>
+        <dl class="facts">
+          <dt class="label">Looking for</dt><dd>Data Analyst · BI Analyst · Data Engineer · Graduate programme</dd>
+          <dt class="label">Available</dt><dd>Full-time from March 2027 · Kuala Lumpur</dd>
+          <dt class="label">Stack</dt><dd>Power BI (DAX, Power Query, data modelling) · SQL · Python · Excel · ML and NLP</dd>
+          <dt class="label">Languages</dt><dd>English · Chinese · Malay</dd>
+        </dl>
+        <div class="certs">
+          <div class="cert"><img src="assets/microsoft.png" alt="" width="34" height="34"><span>Power BI Data Analyst<small>Microsoft PL-300 · 2025</small></span></div>
+          <div class="cert"><img src="assets/aws.png" alt="" width="34" height="34"><span>Cloud Data Pipeline Builder<small>AWS Academy · 2025</small></span></div>
+          <div class="cert"><img src="assets/google.png" alt="" width="34" height="34"><span>Google Analytics<small>Google · 2025</small></span></div>
+          <div class="cert"><img src="assets/postman.png" alt="" width="34" height="34"><span>API Fundamentals Student Expert<small>Postman · 2024</small></span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3 · EXHIBIT 1: hours as working days (count + scroll-filled unit grid) -->
+  <section class="sect ex1" data-sc-act="flow" data-label="Exhibit 1 · Hours">
+    <div class="sc-wrap sect__grid">
+      <div>
+        <div class="bigfig"><span class="n" data-sc-count="0 750" data-sc-count-at="0.2 0.55">750</span><span class="bigfig__u">hours a year</span></div>
+        <h2 class="h-display h-md" style="margin-top:var(--sc-5)">Handed back to the team by automated Power BI reporting.</h2>
+        <p class="prose prose--soft">Reports that were rebuilt by hand now refresh on their own. This is what that time looks like as working days.</p>
+      </div>
+      <figure style="margin:0">
+        <p class="chart-title">About 94 working days a year</p>
+        <p class="chart-sub">One square is one 8-hour day. Columns are working weeks.</p>
+        <div class="days-wrap">
+          <div class="days-rows" aria-hidden="true"><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span></div>
+          <div class="days" id="days" role="img" aria-label="Grid of 94 filled squares, one per 8-hour working day, totalling 750 hours."></div>
+          <div class="days-axis" aria-hidden="true"><span>Week 1</span><span>Week 10</span><span>Week 19</span></div>
+        </div>
+        <figcaption class="source"><b>Exhibit 1.</b> Automated Power BI reporting, FrieslandCampina, 2025 to 2027. 750 hours a year as reported; 750 ÷ 8 ≈ 94 days is derived.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- 4 · EXHIBIT 2: THE PEAK. Pinned; scroll drives an NLP scan over 580 dots. -->
+  <section class="peak" id="tickets" data-sc-act="pin" data-sc-span="3.4" data-label="Exhibit 2 · Tickets" data-ground="dark">
+    <div data-sc-stage class="peak__stage">
+      <div class="peak__copy">
+        <div class="peak__cue" data-sc-cue="0 0.3 0">
+          <p class="label" style="color:var(--night-soft)">NLP automation analysis</p>
+          <h2 class="h-display h-lg" style="margin-top:var(--sc-4)">58,000+ IT tickets. One dot for every hundred.</h2>
+          <p class="prose">The raw material for one question: which requests could stop needing a person?</p>
+        </div>
+        <div class="peak__cue" data-sc-cue="0.26 0.58">
+          <h2 class="h-display h-lg">Machine learning and BERTopic read every one.</h2>
+          <p class="prose">Topic modelling groups tickets by what people actually asked for, not by the category someone picked.</p>
+        </div>
+        <div class="peak__cue" data-sc-cue="0.54 1 0.08 0.02">
+          <h2 class="h-display h-lg"><span class="accent"><span data-sc-count="0 5.93" data-sc-count-at="0.56 0.8">0.00</span>%</span> of the volume could be automated.</h2>
+          <p class="prose">Six use cases, each validated. About 3,440 of the 58,000 tickets.</p>
+        </div>
+      </div>
+      <div class="peak__chart">
+        <div class="legend" aria-hidden="true"><span><i></i>≈100 tickets</span><span><i class="on"></i>flagged automatable</span><span><i class="ring"></i>where it came from</span></div>
+        <div class="field" id="field">
+          <canvas id="field-canvas" role="img" aria-label="A field of 580 dots, each about 100 tickets. 34 dots, 5.93 percent, are flagged as automatable and move into a separate group."></canvas>
+          <div class="tray-label" id="tray-label"><b>≈3,440</b><span>tickets across 6 validated use cases</span></div>
+        </div>
+        <p class="source"><b>Exhibit 2.</b> NLP automation analysis, FrieslandCampina. Totals, share and use-case count are the study's results; dot positions are illustrative.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5 · EXHIBIT 3: cost and reach (reveal wipes + unit marks) -->
+  <section class="sect ex3" data-sc-act="flow" data-label="Exhibit 3 · Reach">
+    <div class="sc-wrap">
+      <div class="ex3__head" data-sc-in>
+        <h2 class="h-display h-lg">Cheap enough to keep running. Used well beyond one team.</h2>
+        <p class="prose prose--soft">A model that looks clever in a demo has to survive its running cost. A dashboard earns its keep when the people who decide actually open it.</p>
+      </div>
+      <div class="reach">
+        <figure class="panel" style="margin:0">
+          <p class="chart-title">AI pipeline token usage</p>
+          <p class="chart-sub" style="margin-bottom:0">Same analysis, after optimisation. Indexed, before = 100.</p>
+          <div class="bars">
+            <div class="bar-row"><span class="label">Before</span><div class="bar-track"><div class="bar bar--before" data-sc-reveal="left" data-sc-reveal-at="0.18 0.4" data-tip="<b>Before:</b> index 100">100</div></div></div>
+            <div class="bar-row"><span class="label">After</span><div class="bar-track"><div class="bar bar--after" data-sc-reveal="left" data-sc-reveal-at="0.26 0.46" data-tip="<b>After:</b> index 52, 48% lower">52</div><div class="cut" data-sc-reveal="left" data-sc-reveal-at="0.4 0.52">−48%</div></div></div>
+          </div>
+          <div class="bar-axis" aria-hidden="true"><span></span><div><span>0</span><span>50</span><span>100</span></div></div>
+          <figcaption class="source"><b>Exhibit 3a.</b> AI pipeline optimisation, FrieslandCampina: 48% lower token usage.</figcaption>
+        </figure>
+        <div class="panels-r">
+          <figure class="panel" style="margin:0">
+            <p class="chart-title">IT 360 Dashboard</p>
+            <p class="unit-fig">20+<small>countries supported</small></p>
+            <div class="units" id="units-countries" style="--w0:0.22" role="img" aria-label="20 squares, one per country supported, and a plus sign."></div>
+            <figcaption class="source"><b>Exhibit 3b.</b> One mark per country. FrieslandCampina.</figcaption>
+          </figure>
+          <figure class="panel" style="margin:0">
+            <p class="chart-title">AMS/IMS Financial Dashboard</p>
+            <p class="unit-fig">10+<small>cluster heads use it</small></p>
+            <div class="units" id="units-heads" style="--w0:0.3" role="img" aria-label="10 dots, one per cluster head, and a plus sign."></div>
+            <figcaption class="source"><b>Exhibit 3c.</b> One mark per cluster head. FrieslandCampina.</figcaption>
+          </figure>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6 · TIMELINE: a real Gantt, panned sideways -->
+  <section class="tl" data-sc-act="pan" data-sc-span="2.6" data-label="Exhibit 4 · Timeline">
+    <div data-sc-stage class="tl__stage">
+      <div class="tl__rail" data-sc-pan="0.02">
+        <div class="tl__lead">
+          <p class="label">Exhibit 4 · Career timeline</p>
+          <h2 class="h-display h-lg" style="margin-top:var(--sc-4)">Seven years, one direction.</h2>
+          <p class="prose prose--soft">From running e-commerce operations to building enterprise reporting, in the order it happened.</p>
+        </div>
+        <div class="gantt" id="gantt" role="img" aria-label="Career timeline from 2019 to 2027.">
+          <div class="g-yr" style="--m:0"><span>2019</span></div>
+          <div class="g-yr" style="--m:12"><span>2020</span></div>
+          <div class="g-yr" style="--m:24"><span>2021</span></div>
+          <div class="g-yr" style="--m:36"><span>2022</span></div>
+          <div class="g-yr" style="--m:48"><span>2023</span></div>
+          <div class="g-yr" style="--m:60"><span>2024</span></div>
+          <div class="g-yr" style="--m:72"><span>2025</span></div>
+          <div class="g-yr" style="--m:84"><span>2026</span></div>
+          <div class="g-yr" style="--m:96"><span>2027</span></div>
+
+          <div class="g-row" style="--row:0.6"><span class="g-lab" style="--s:0">Deputy Head, Scouts Association<small>2019 to 2020 · 70+ participants</small></span><div class="g-bar g-bar--edu" style="--s:0;--e:23" data-tip="<b>2019 to 2020</b> · Deputy Head, Scouts Association"></div></div>
+          <div class="g-row" style="--row:1.6"><span class="g-lab" style="--s:21">E-Commerce Operations, Kedai Ubat Wey Cang<small>Oct 2020 to Apr 2022 · full-time</small></span><div class="g-bar" style="--s:21;--e:39" data-tip="<b>Oct 2020 to Apr 2022</b> · E-Commerce Operations (full-time)"></div></div>
+          <div class="g-row" style="--row:2.6"><span class="g-lab" style="--s:40">Diploma in Software Engineering, APU<small>May 2022 to Jul 2024 · First-Class Honours</small></span><div class="g-bar g-bar--edu" style="--s:40;--e:66" data-tip="<b>May 2022 to Jul 2024</b> · Diploma, APU"></div></div>
+          <div class="g-row" style="--row:3.6"><span class="g-lab" style="--s:63">Full-Stack Developer Intern, IPS Software<small>Apr to Jul 2024</small></span><div class="g-bar" style="--s:63;--e:66" data-tip="<b>Apr to Jul 2024</b> · Full-Stack Developer Intern"></div></div>
+          <div class="g-row" style="--row:4.6"><span class="g-lab" style="--s:68">Degree in Data Analytics, APU<small>Sep 2024 to Apr 2027 · First-Class Honours</small></span><div class="g-bar g-bar--edu" style="--s:68;--e:99" data-tip="<b>Sep 2024 to Apr 2027</b> · Degree in Data Analytics, APU"></div></div>
+          <div class="g-row" style="--row:5.6"><span class="g-lab" style="--s:78">Data Analysis Intern, FrieslandCampina<small>Jul 2025 to Feb 2027</small></span><div class="g-bar g-bar--fc" style="--s:78;--e:97" data-tip="<b>Jul 2025 to Feb 2027</b> · Data Analysis Intern, FrieslandCampina"></div></div>
+
+          <div class="g-row" style="--row:6.45">
+            <span class="g-ms" style="--m:66"></span><span class="g-mslab" style="--m:66"><b>2024</b> · Postman Student Expert</span>
+            <span class="g-ms" style="--m:78"></span><span class="g-mslab" style="--m:78"><b>2025</b> · Microsoft PL-300 · AWS Academy · Google Analytics</span>
+          </div>
+
+          <div class="g-mark g-mark--now" id="g-now" style="--m:94"><span id="g-now-label">Now</span></div>
+          <div class="g-mark" style="--m:98"><span>Available · Mar 2027</span></div>
+        </div>
+        <div class="tl__end">
+          <p>The next bar on this chart is a full-time role, from March 2027.</p>
+          <a class="btn" href="mailto:shengyao330@gmail.com">Email me</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7 · INDEX: plain list, no thumbnails -->
+  <section class="sect" data-sc-act="flow" data-label="Index">
+    <div class="sc-wrap sect__grid">
+      <div data-sc-in>
+        <h2 class="h-display h-lg">Also built and led.</h2>
+        <p class="prose prose--soft" style="margin-top:var(--sc-4)">Web and software work from before the data focus, plus the events I organised. Each link opens the real thing.</p>
+      </div>
+      <div>
+        <div class="index-block" data-sc-in>
+          <h3 class="label">Built</h3>
+          <ul class="index-list">
+            <li><a href="https://iai-chatbot-15.streamlit.app/" target="_blank" rel="noopener"><span class="t">AI Chatbot</span><span class="w">Python, spaCy, Discord, Streamlit</span><span class="go">Live demo ↗</span></a></li>
+            <li><a href="https://www.klt.com.my/" target="_blank" rel="noopener"><span class="t">KLT Website</span><span class="w">Responsive corporate site</span><span class="go">Visit ↗</span></a></li>
+            <li><a href="https://edu-artivo.com/en/" target="_blank" rel="noopener"><span class="t">Artivo</span><span class="w">Education platform with interactive tools</span><span class="go">Visit ↗</span></a></li>
+            <li><a href="https://ibeautynew.demo.com.my/en/" target="_blank" rel="noopener"><span class="t">IPS Skin</span><span class="w">Skincare bookings and online shop</span><span class="go">Visit ↗</span></a></li>
+            <li><a href="https://www.youtube.com/watch?v=acIB2kOPO2M" target="_blank" rel="noopener"><span class="t">Grocery Store</span><span class="w">PHP, SQL, WampServer</span><span class="go">Video ↗</span></a></li>
+            <li><a href="https://weycang.my.canva.site/" target="_blank" rel="noopener"><span class="t">Digital Name Card</span><span class="w">Contact details shared over QR</span><span class="go">Visit ↗</span></a></li>
+          </ul>
+        </div>
+        <div class="index-block" data-sc-in>
+          <h3 class="label">Led</h3>
+          <ul class="index-list">
+            <li><div class="row"><span class="t">Career Fair Committee</span><span class="w">Represented FrieslandCampina at 2 APU career fairs, 5,000+ visitors</span><span class="go">FrieslandCampina</span></div></li>
+            <li><div class="row"><span class="t">Guest Lecture Coordinator</span><span class="w">APU and Sunway; speakers, logistics, stakeholders</span><span class="go">FrieslandCampina</span></div></li>
+            <li><div class="row"><span class="t">Lead Organizer, PwC Guest Lecture</span><span class="w">Asia Pacific University</span><span class="go">2025</span></div></li>
+            <li><div class="row"><span class="t">Deputy Head, Scouts Association</span><span class="w">Event planning for 70+ participants</span><span class="go">2019 to 2020</span></div></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8 · SIGN-OFF: the email is the headline. Holds. -->
+  <section class="sign" data-sc-act="flow" data-label="Contact" data-ground="dark">
+    <div class="sc-wrap sign__inner">
+      <p class="label">Hiring for data, BI or analytics?</p>
+      <a class="sign__mail" href="mailto:shengyao330@gmail.com">shengyao330<span>@</span>gmail.com</a>
+      <p class="sign__lede">Email is quickest. A LinkedIn message works too. Either way, tell me about the role.</p>
+      <div class="sign__actions">
+        <a class="btn" href="mailto:shengyao330@gmail.com">Email me</a>
+        <button class="btn btn--ghost" type="button" id="copy-mail">Copy address</button>
+        <a class="btn btn--ghost" href="https://www.linkedin.com/in/sheng-yao-siew-a02716278/" target="_blank" rel="noopener">Message on LinkedIn</a>
+        <a class="btn btn--ghost" href="assets/resume-siew-sheng-yao.pdf" download>Download CV</a>
+        <span class="copy-status" id="copy-status" role="status"></span>
+      </div>
+      <div class="sign__foot">
+        <span>Siew Sheng Yao · Data Analyst</span>
+        <span>Bukit Jalil, Kuala Lumpur</span>
+        <span>English · 中文 · Bahasa Melayu</span>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<div class="tip" id="tip" aria-hidden="true"></div>
+
+<script src="scrollcraft.js"></script>
+<script>
+(function () {
+  var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var finePointer = matchMedia('(hover: hover) and (pointer: fine)').matches;
+
+  /* ---- Exhibit 1: 95 cells, 94 filled ---------------------------------- */
+  var days = document.getElementById('days');
+  for (var i = 0; i < 95; i++) {
+    var d = document.createElement('span');
+    if (i < 94) {
+      d.className = 'd';
+      d.style.setProperty('--i', (i / 93).toFixed(4));
+      d.setAttribute('data-tip', '<b>Day ' + (i + 1) + ' of 94</b> · 8 hours not spent rebuilding a report');
+    } else {
+      d.className = 'd d--empty';
+      d.setAttribute('data-tip', '750 h ÷ 8 h = 93.75 days, shown as 94');
+    }
+    days.appendChild(d);
+  }
+
+  /* ---- Exhibit 3: unit marks -------------------------------------------- */
+  function units(id, n, cls, tip) {
+    var host = document.getElementById(id);
+    for (var k = 0; k < n; k++) {
+      var u = document.createElement('span');
+      u.className = 'u ' + cls;
+      u.style.setProperty('--i', (k / (n - 1)).toFixed(3));
+      u.setAttribute('data-tip', tip);
+      host.appendChild(u);
+    }
+    var p = document.createElement('span'); p.className = 'plus'; p.textContent = '+'; p.setAttribute('aria-hidden', 'true');
+    host.appendChild(p);
+  }
+  units('units-countries', 20, '', '<b>1 country</b> supported by the IT 360 Dashboard');
+  units('units-heads', 10, 'u--dot', '<b>1 cluster head</b> using the AMS/IMS Financial Dashboard');
+
+  /* ---- Timeline: "now" marker from today's date ------------------------- */
+  var now = new Date();
+  var m = (now.getFullYear() - 2019) * 12 + now.getMonth();
+  var gNow = document.getElementById('g-now');
+  if (m >= 0 && m < 102) {
+    gNow.style.setProperty('--m', m);
+    document.getElementById('g-now-label').textContent = 'Now · ' + now.toLocaleString('en-GB', { month: 'short', year: 'numeric' });
+  } else { gNow.remove(); }
+
+  ScrollCraft.mount(document.body);
+
+  /* ---- Running head: current section + ground --------------------------- */
+  var where = document.getElementById('where');
+  var labelled = document.querySelectorAll('[data-label]');
+  var headIO = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (!e.isIntersecting) return;
+      where.textContent = e.target.getAttribute('data-label');
+      document.body.classList.toggle('on-dark', e.target.getAttribute('data-ground') === 'dark');
+    });
+  }, { rootMargin: '-56px 0px -92% 0px', threshold: 0 });
+  labelled.forEach(function (s) { headIO.observe(s); });
+
+  /* ---- Cover: subtle pointer depth -------------------------------------- */
+  var stage = document.getElementById('cover-stage');
+  if (finePointer && !reduce) {
+    var tx = 0, ty = 0, cx = 0, cy = 0, raf = 0;
+    stage.addEventListener('pointermove', function (e) {
+      var r = stage.getBoundingClientRect();
+      tx = (e.clientX - r.left) / r.width - 0.5;
+      ty = (e.clientY - r.top) / r.height - 0.5;
+      if (!raf) raf = requestAnimationFrame(step);
+    });
+    stage.addEventListener('pointerleave', function () { tx = 0; ty = 0; if (!raf) raf = requestAnimationFrame(step); });
+    function step() {
+      cx += (tx - cx) * 0.08; cy += (ty - cy) * 0.08;
+      stage.style.setProperty('--mx', cx.toFixed(4));
+      stage.style.setProperty('--my', cy.toFixed(4));
+      raf = (Math.abs(tx - cx) > 0.001 || Math.abs(ty - cy) > 0.001) ? requestAnimationFrame(step) : 0;
+    }
+  }
+
+  /* ---- Signature move: the ticket field --------------------------------- */
+  var act = document.getElementById('tickets');
+  var field = document.getElementById('field');
+  var cv = document.getElementById('field-canvas');
+  var ctx = cv.getContext('2d');
+  var trayLabel = document.getElementById('tray-label');
+  var N = 580, FLAG = 34;
+  var ACC = '#FF6B4E';
+
+  function rng(seed) { return function () { seed |= 0; seed = seed + 0x6D2B79F5 | 0; var t = Math.imul(seed ^ seed >>> 15, 1 | seed); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
+  var rand = rng(58000);
+  var dots = [];
+  for (var j = 0; j < N; j++) dots.push({ jx: (rand() - 0.5) * 0.55, jy: (rand() - 0.5) * 0.55, flag: false });
+  var order = dots.map(function (_, k) { return k; });
+  for (var s = order.length - 1; s > 0; s--) { var r = Math.floor(rand() * (s + 1)); var tmp = order[s]; order[s] = order[r]; order[r] = tmp; }
+  order.slice(0, FLAG).forEach(function (k) { dots[k].flag = true; });
+
+  var W = 0, H = 0, geo = null, lastP = -1, dirty = true;
+  function layout() {
+    var rect = field.getBoundingClientRect();
+    W = rect.width; H = rect.height;
+    if (!W || !H) return;
+    var dpr = Math.min(2, window.devicePixelRatio || 1);
+    cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr);
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    var portrait = W < 560;
+    var cols, rows, cell, fx, fy, tcols, tcell, tx0, ty0;
+    if (!portrait) {
+      cols = 29; rows = 20;
+      cell = Math.min((W * 0.72) / cols, (H * 0.9) / rows);
+      fx = 0; fy = (H - cell * rows) / 2;
+      tcols = 5; tcell = cell * 1.3;
+      tx0 = fx + cols * cell + Math.max(cell * 3, W * 0.06);
+      ty0 = fy + cell * rows - tcell * Math.ceil(FLAG / tcols);
+      trayLabel.style.left = tx0 + 'px';
+      trayLabel.style.top = Math.max(0, ty0 - 96) + 'px';
+    } else {
+      cols = 20; rows = 29;
+      tcols = 12; 
+      cell = Math.min(W / cols, (H * 0.82) / (rows + 4.5));
+      fx = (W - cols * cell) / 2; fy = 0;
+      tcell = cell * 1.25;
+      tx0 = fx; ty0 = fy + rows * cell + cell * 1.4;
+      trayLabel.style.left = (fx + tcols * tcell + cell) + 'px';
+      trayLabel.style.top = (ty0 - 4) + 'px';
+    }
+    geo = { cols: cols, rows: rows, cell: cell, fx: fx, fy: fy };
+    var ranked = [];
+    dots.forEach(function (d, k) {
+      d.c = k % cols; d.r = Math.floor(k / cols);
+      d.x = fx + (d.c + 0.5 + d.jx) * cell;
+      d.y = fy + (d.r + 0.5 + d.jy) * cell;
+      if (d.flag) ranked.push(d);
+    });
+    ranked.sort(function (a, b) { return a.c - b.c || a.r - b.r; });
+    ranked.forEach(function (d, k) {
+      d.rank = k;
+      d.tx = tx0 + ((k % tcols) + 0.5) * tcell;
+      d.ty = ty0 + (Math.floor(k / tcols) + 0.5) * tcell;
+    });
+    dirty = true;
+  }
+
+  function clamp01(v) { return v < 0 ? 0 : v > 1 ? 1 : v; }
+  function ease(t) { return 1 - Math.pow(1 - t, 3); }
+  function progress() {
+    if (reduce) return 1;
+    var r = act.getBoundingClientRect();
+    var travel = r.height - innerHeight;
+    return travel > 0 ? clamp01(-r.top / travel) : 0;
+  }
+
+  var state = { scan: 0, mig: 0 };
+  function draw(p) {
+    if (!geo) return;
+    var cell = geo.cell, rad = Math.max(1.4, cell * 0.2);
+    var scan = clamp01((p - 0.12) / 0.36);
+    var mig = clamp01((p - 0.5) / 0.3);
+    state.scan = scan; state.mig = mig;
+    ctx.clearRect(0, 0, W, H);
+
+    var scanX = geo.fx + scan * geo.cols * cell;
+    if (scan > 0 && scan < 1) {
+      var g = ctx.createLinearGradient(scanX - cell * 6, 0, scanX, 0);
+      g.addColorStop(0, 'rgba(255,107,78,0)'); g.addColorStop(1, 'rgba(255,107,78,0.14)');
+      ctx.fillStyle = g;
+      ctx.fillRect(scanX - cell * 6, geo.fy - cell * 0.5, cell * 6, geo.rows * cell + cell);
+    }
+
+    for (var k = 0; k < dots.length; k++) {
+      var d = dots[k];
+      var xn = (d.c + 0.5) / geo.cols;
+      var passed = scan >= xn;
+      if (d.flag && passed) {
+        var t = ease(clamp01(mig * 1.6 - (d.rank / FLAG) * 0.6));
+        if (t > 0.02) {
+          ctx.beginPath(); ctx.arc(d.x, d.y, rad * 1.05, 0, Math.PI * 2);
+          ctx.strokeStyle = 'rgba(255,107,78,' + (0.55 * t).toFixed(3) + ')'; ctx.lineWidth = 1.1; ctx.stroke();
+        }
+        var x = d.x + (d.tx - d.x) * t, y = d.y + (d.ty - d.y) * t;
+        ctx.beginPath(); ctx.arc(x, y, rad * (1.25 + 0.2 * t), 0, Math.PI * 2);
+        ctx.fillStyle = ACC; ctx.fill();
+      } else {
+        var near = scan > 0 && scan < 1 && Math.abs(xn - scan) < 1.5 / geo.cols;
+        ctx.beginPath(); ctx.arc(d.x, d.y, rad, 0, Math.PI * 2);
+        ctx.fillStyle = near ? 'rgba(238,236,230,0.95)' : passed ? 'rgba(163,168,177,0.34)' : 'rgba(163,168,177,0.72)';
+        ctx.fill();
+      }
+    }
+
+    if (scan > 0 && scan < 1) {
+      ctx.fillStyle = ACC;
+      ctx.fillRect(scanX - 1, geo.fy - cell * 0.8, 2, geo.rows * cell + cell * 1.6);
+    }
+    trayLabel.style.opacity = clamp01((mig - 0.55) / 0.35).toFixed(3);
+  }
+
+  var running = false;
+  function tick() {
+    if (!running) return;
+    var p = progress();
+    if (dirty || Math.abs(p - lastP) > 0.0004) { draw(p); lastP = p; dirty = false; }
+    requestAnimationFrame(tick);
+  }
+  new IntersectionObserver(function (es) {
+    es.forEach(function (e) {
+      var was = running; running = e.isIntersecting;
+      if (running && !was) { dirty = true; requestAnimationFrame(tick); }
+    });
+  }, { rootMargin: '20% 0px' }).observe(act);
+  new ResizeObserver(function () { layout(); if (!running) { draw(progress()); } }).observe(field);
+  layout(); draw(progress());
+
+  /* ---- Tooltip: DOM marks and the canvas -------------------------------- */
+  var tip = document.getElementById('tip');
+  function showTip(html, x, y) {
+    tip.innerHTML = html;
+    var w = tip.offsetWidth, h = tip.offsetHeight;
+    var left = Math.min(innerWidth - w - 12, x + 14), top = y - h - 14;
+    if (top < 64) top = y + 18;
+    tip.style.left = left + 'px'; tip.style.top = top + 'px';
+    tip.classList.add('is-on');
+  }
+  function hideTip() { tip.classList.remove('is-on'); }
+  if (finePointer) {
+    document.addEventListener('pointermove', function (e) {
+      if (e.target === cv) return;
+      var t = e.target.closest && e.target.closest('[data-tip]');
+      if (t) showTip(t.getAttribute('data-tip'), e.clientX, e.clientY); else hideTip();
+    }, { passive: true });
+    cv.addEventListener('pointermove', function (e) {
+      if (!geo) return;
+      var r = cv.getBoundingClientRect(), px = e.clientX - r.left, py = e.clientY - r.top;
+      var best = null, bd = geo.cell * geo.cell * 0.6;
+      dots.forEach(function (d) {
+        var t = d.flag && state.scan >= (d.c + 0.5) / geo.cols ? ease(clamp01(state.mig * 1.6 - (d.rank / FLAG) * 0.6)) : 0;
+        var x = d.x + ((d.tx || d.x) - d.x) * t, y = d.y + ((d.ty || d.y) - d.y) * t;
+        var dd = (x - px) * (x - px) + (y - py) * (y - py);
+        if (dd < bd) { bd = dd; best = d; }
+      });
+      if (!best) { hideTip(); return; }
+      var read = state.scan >= (best.c + 0.5) / geo.cols;
+      var msg = !read ? '<b>≈100 tickets</b> · not read yet'
+        : best.flag ? '<b>≈100 tickets</b> · flagged automatable'
+        : '<b>≈100 tickets</b> · still needs a person';
+      showTip(msg, e.clientX, e.clientY);
+    });
+    cv.addEventListener('pointerleave', hideTip);
+  }
+
+  /* ---- Copy email ------------------------------------------------------- */
+  var copyBtn = document.getElementById('copy-mail');
+  var copyStatus = document.getElementById('copy-status');
+  copyBtn.addEventListener('click', function () {
+    var done = function (msg) { copyStatus.textContent = msg; setTimeout(function () { copyStatus.textContent = ''; }, 2600); };
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText('shengyao330@gmail.com').then(function () { done('Copied'); }, function () { done('Copy failed. Select the address above.'); });
+    } else { done('Copy failed. Select the address above.'); }
+  });
+})();
+</script>
+</body>
+</html>
