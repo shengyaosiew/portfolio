@@ -11,7 +11,7 @@ export const CV = "./media/resume-siew-sheng-yao.pdf";
 export const media = (f: string) => `./media/${f}`;
 
 // Labels live in i18n.tsx; these are the ids and order.
-export const NAV = ["power-bi", "impact", "journey", "events", "projects"] as const;
+export const NAV = ["power-bi", "impact", "journey", "skills", "events", "projects"] as const;
 
 // Certificates (from the CV and the old site). Only PL-300 has a public verify link.
 export const CERTS = [
@@ -31,12 +31,12 @@ export const EXAM_SKILLS = [
 
 // Project images are real screenshots of the live sites (scripts/shoot-projects.cjs)
 // or the project's own YouTube thumbnail. No image = we could not capture it honestly.
-export type Project = { slug: string; href?: string; img?: string; shape: "wide" | "phone"; note?: "noLink" | "asleep" };
+export type Project = { slug: string; href?: string; img?: string; shape: "wide" | "phone" | "photo"; note?: "noLink" | "asleep" };
 export const PROJECTS: Project[] = [
   { slug: "klt", href: "https://www.klt.com.my/", img: "pj-klt.webp", shape: "wide" },
   { slug: "artivo", href: "https://edu-artivo.com/en/", img: "pj-artivo.webp", shape: "wide" },
   { slug: "namecard", href: "https://weycang.my.canva.site/", img: "pj-namecard.webp", shape: "phone" },
   { slug: "grocery", href: "https://www.youtube.com/watch?v=acIB2kOPO2M", img: "pj-grocery.webp", shape: "wide" },
-  { slug: "chatbot", href: "https://iai-chatbot-15.streamlit.app/", shape: "wide", note: "asleep" },
-  { slug: "ipsskin", shape: "wide", note: "noLink" },
+  { slug: "chatbot", href: "https://iai-chatbot-15.streamlit.app/", img: "pj-chatbot.webp", shape: "photo" },
+  { slug: "ipsskin", href: "https://ibeautynew.demo.com.my/en/", img: "pj-ipsskin.webp", shape: "photo" },
 ];

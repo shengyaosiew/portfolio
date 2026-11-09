@@ -33,6 +33,7 @@ const lang = flags.find((f) => f === "zh" || f === "ms") || "en";
     ["tickets", "#ai-tickets", [0.3, 0.55, 1]],
     ["reach", "#ai-tickets + section", [0.45]],
     ["journey", "#journey", [0.4]],
+    ["skills", "#skills", [0, 0.6]],
     ["events", "#events", [0.1]],
     ["projects", "#projects", [0.2]],
     ["contact", "#contact", [0]],
@@ -58,20 +59,21 @@ const lang = flags.find((f) => f === "zh" || f === "ms") || "en";
       await page.waitForTimeout(1300);
       await shot(`${name}-${f}`);
     }
-    if (name === "journey") {
-      await page.click("#tab-certs"); await page.waitForTimeout(400);
-      await page.evaluate(() => window.scrollTo({ top: document.querySelector("#journey").offsetTop + 200, behavior: "instant" }));
-      await page.waitForTimeout(1500); await shot("journey-certs");
-      await page.evaluate(() => window.scrollTo({ top: document.querySelector("#journey").offsetTop + 900, behavior: "instant" }));
-      await page.waitForTimeout(1500); await shot("journey-skills");
-      await page.click("#tab-career"); await page.waitForTimeout(400);
-    }
     if (name === "projects") {
       // step the carousel twice with the arrow button
       const next = page.locator("#projects button").nth(1);
       for (let k = 0; k < 2; k++) { await next.click(); await page.waitForTimeout(900); }
       await shot("projects-step2");
     }
+  }
+  if (+w < 768) {
+    // mobile menu over the hero: must sit above the hero copy
+    await page.evaluate(() => window.scrollTo({ top: 0, behavior: "instant" }));
+    await page.waitForTimeout(600);
+    await page.click("[aria-controls=mobile-menu]"); await page.waitForTimeout(900); await shot("menu-open");
+    await page.mouse.click(+w / 2, +h - 40); await page.waitForTimeout(500);
+    const closed = await page.evaluate(() => !document.getElementById("mobile-menu"));
+    report.push({ menuClosedByOutsideTap: closed });
   }
   const overflow = await page.evaluate(() => document.documentElement.scrollWidth - innerWidth);
   fs.writeFileSync(`${out}/report.json`, JSON.stringify({ meta, errors, failed, overflow, report }, null, 2));

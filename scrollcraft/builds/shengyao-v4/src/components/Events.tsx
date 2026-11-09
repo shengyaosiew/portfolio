@@ -53,7 +53,7 @@ export default function Events() {
           <motion.figure className="group relative m-0 flex flex-col justify-between overflow-hidden rounded-xl bg-[#121316] p-5 text-white md:col-span-6" {...rise(0.32)}>
             <img src={media("scouts.webp")} alt="" loading="lazy" className="absolute inset-0 h-full w-full object-cover object-[50%_35%] transition-transform duration-700 ease-out group-hover:scale-[1.04]" />
             <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-black/10" />
-            <span className="label relative self-end text-white/80">{T.scouts.label}</span>
+            <img src={media("scout-emblem.png")} alt={T.scouts.label} width={44} height={44} className="relative h-11 w-11 self-end rounded-full shadow-[0_4px_14px_rgba(0,0,0,.35)] ring-2 ring-white/80" />
             <figcaption className="relative">
               <span className="display block text-5xl">70+</span>
               <span className="mt-2 block font-semibold">{T.scouts.what}</span>

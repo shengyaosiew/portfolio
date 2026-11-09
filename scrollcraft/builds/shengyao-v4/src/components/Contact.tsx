@@ -1,9 +1,10 @@
 import { useState } from "react";
 import { motion } from "motion/react";
 import { Copy, Check } from "lucide-react";
-import { CREDENTIAL, CV, EMAIL, GITHUB, LINKEDIN } from "../data";
+import { CREDENTIAL, CV, EMAIL, GITHUB } from "../data";
 import { useReducedMotion } from "../lib/hooks";
 import { useI18n } from "../i18n";
+import { LinkedInCTA } from "./ui/linkedin-cta";
 
 const TOOLS = ["Power BI", "DAX", "Power Query", "Python", "SQL", "Excel", "BERTopic", "NLP", "ServiceNow", "AWS", "GitHub"];
 const EASE = [0.22, 1, 0.36, 1] as const;
@@ -81,13 +82,16 @@ export default function Contact() {
 
         <div className="mt-10 flex flex-wrap items-center gap-3">
           <motion.a {...rise(0.9)} href={`mailto:${EMAIL}`} className="shine rounded-full bg-night-ink px-7 py-3.5 text-sm font-semibold text-[#121316] transition-transform duration-200 hover:scale-[1.04] active:scale-95">{T.email}</motion.a>
-          <motion.a {...rise(1)} href={LINKEDIN} target="_blank" rel="noopener" className="rounded-full border border-white/30 px-6 py-3.5 text-sm font-semibold transition-colors duration-150 hover:border-accent-hot hover:text-accent-hot">{T.linkedin}</motion.a>
           <motion.a {...rise(1.1)} href={CV} download className="rounded-full border border-white/30 px-6 py-3.5 text-sm font-semibold transition-colors duration-150 hover:border-accent-hot hover:text-accent-hot">{T.cv}</motion.a>
           <motion.button {...rise(1.2)} type="button" onClick={copy} className="inline-flex items-center gap-2 rounded-full border border-white/30 px-6 py-3.5 text-sm font-semibold transition-colors duration-150 hover:border-accent-hot hover:text-accent-hot">
             {status === "copied" ? <Check size={16} aria-hidden="true" /> : <Copy size={16} aria-hidden="true" />} {T.copy}
           </motion.button>
           <span role="status" className="min-w-[8ch] text-sm text-accent-hot">{status === "copied" ? T.copied : status === "fail" ? T.fail : ""}</span>
         </div>
+
+        <motion.div className="mt-8 max-w-md" {...rise(1.3)}>
+          <LinkedInCTA tone="dark" title={t.nav.linkedin} sub={t.nav.linkedinSub} />
+        </motion.div>
 
         {/* tool strip */}
         <div className="relative mt-16 overflow-hidden py-3 [mask-image:linear-gradient(to_right,transparent,#000_12%,#000_88%,transparent)]" aria-hidden="true">

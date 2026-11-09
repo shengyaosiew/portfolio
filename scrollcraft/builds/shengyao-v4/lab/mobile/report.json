@@ -61,11 +61,11 @@
       "videoTime": null
     },
     {
-      "file": "lab/mobile/13-journey-certs.png",
+      "file": "lab/mobile/13-skills-0.png",
       "videoTime": null
     },
     {
-      "file": "lab/mobile/14-journey-skills.png",
+      "file": "lab/mobile/14-skills-0.6.png",
       "videoTime": null
     },
     {
@@ -83,6 +83,13 @@
     {
       "file": "lab/mobile/18-contact-0.png",
       "videoTime": null
+    },
+    {
+      "file": "lab/mobile/19-menu-open.png",
+      "videoTime": null
+    },
+    {
+      "menuClosedByOutsideTap": true
     }
   ]
 }

@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
-import { Check, Languages, Menu, Moon, Sun, X } from "lucide-react";
+import { Check, ChevronDown, Menu, Moon, Sun, X } from "lucide-react";
+import { LinkedInCTA } from "./ui/linkedin-cta";
 import { EMAIL, NAV, media } from "../data";
 import { LANGS, useI18n } from "../i18n";
 import { useTheme } from "../theme";
@@ -34,8 +35,9 @@ function LangPicker({ compact = false }: { compact?: boolean }) {
         aria-label={`${t.nav.lang}: ${cur.name}`}
         className={`flex items-center gap-1.5 rounded-full text-sm font-semibold text-white transition-colors duration-150 hover:bg-white/10 ${compact ? "bg-black/65 px-3 py-2.5 backdrop-blur-md" : "px-3 py-1.5"}`}
       >
-        <Languages size={compact ? 18 : 16} aria-hidden="true" />
+        <img src={media(cur.flag)} alt="" width={20} height={14} className="h-[14px] w-5 rounded-[3px] object-cover ring-1 ring-white/25" />
         <span>{cur.short}</span>
+        <ChevronDown size={14} className={`opacity-70 transition-transform duration-200 ${open ? "rotate-180" : ""}`} aria-hidden="true" />
       </button>
       {open && (
         <div role="menu" aria-label={t.nav.lang} className="absolute right-0 top-[calc(100%+10px)] z-50 min-w-[11.5rem] overflow-hidden rounded-2xl border border-white/10 bg-[#121316]/95 p-1.5 text-white shadow-2xl backdrop-blur-md">
@@ -49,8 +51,9 @@ function LangPicker({ compact = false }: { compact?: boolean }) {
               onClick={() => { setLang(l.id); setOpen(false); }}
               className="flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-left text-sm transition-colors duration-150 hover:bg-white/10"
             >
-              <span className="w-9 shrink-0 font-mono text-[11px] font-semibold text-white/55">{l.short}</span>
+              <img src={media(l.flag)} alt="" width={24} height={16} className="h-4 w-6 shrink-0 rounded-[3px] object-cover ring-1 ring-white/20" />
               <span className="flex-1 font-medium">{l.name}</span>
+              <span className="font-mono text-[11px] font-semibold text-white/45">{l.short}</span>
               {l.id === lang && <Check size={15} className="text-accent-hot" aria-hidden="true" />}
             </button>
           ))}
@@ -148,7 +151,10 @@ export default function Nav() {
       </nav>
 
       {open && (
-        <div id="mobile-menu" className="fixed inset-x-0 top-0 z-40 bg-bone px-5 pb-6 pt-20 text-ink shadow-lg md:hidden">
+        <>
+        {/* tap anywhere outside the menu to close it */}
+        <div className="menu-fade fixed inset-0 z-[48] bg-black/40 backdrop-blur-[2px] md:hidden" onClick={() => setOpen(false)} aria-hidden="true" />
+        <div id="mobile-menu" className="menu-in fixed inset-x-0 top-0 z-[49] max-h-[100dvh] overflow-y-auto rounded-b-3xl bg-bone px-5 pb-6 pt-20 text-ink shadow-2xl md:hidden">
           {NAV.map((id) => (
             <a key={id} href={`#${id}`} onClick={() => setOpen(false)} className="block border-b border-ink/10 py-3 text-lg font-medium">
               {t.nav.links[id]}
@@ -172,7 +178,11 @@ export default function Nav() {
           <a href={`mailto:${EMAIL}`} onClick={() => setOpen(false)} className="mt-5 inline-flex rounded-full bg-ink px-6 py-3 font-semibold text-bone">
             {t.nav.email}
           </a>
+          <div className="mt-4">
+            <LinkedInCTA title={t.nav.linkedin} sub={t.nav.linkedinSub} onClick={() => setOpen(false)} />
+          </div>
         </div>
+        </>
       )}
     </>
   );

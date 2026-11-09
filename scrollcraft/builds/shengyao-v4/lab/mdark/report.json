@@ -1,7 +1,7 @@
 {
   "meta": {
     "title": "ShengYao",
-    "lang": "ms",
+    "lang": "zh-CN",
     "dark": true
   },
   "errors": [],
@@ -61,11 +61,11 @@
       "videoTime": null
     },
     {
-      "file": "lab/mdark/13-journey-certs.png",
+      "file": "lab/mdark/13-skills-0.png",
       "videoTime": null
     },
     {
-      "file": "lab/mdark/14-journey-skills.png",
+      "file": "lab/mdark/14-skills-0.6.png",
       "videoTime": null
     },
     {
@@ -83,6 +83,13 @@
     {
       "file": "lab/mdark/18-contact-0.png",
       "videoTime": null
+    },
+    {
+      "file": "lab/mdark/19-menu-open.png",
+      "videoTime": null
+    },
+    {
+      "menuClosedByOutsideTap": true
     }
   ]
 }

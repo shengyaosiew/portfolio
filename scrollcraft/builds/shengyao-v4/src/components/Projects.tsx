@@ -20,6 +20,13 @@ function Shot({ p, name }: { p: Project; name: string }) {
       </div>
     );
   }
+  if (p.shape === "photo") {
+    return (
+      <div className="w-full overflow-hidden rounded-xl bg-white shadow-[0_2px_6px_rgba(20,15,10,.1),0_30px_60px_-24px_rgba(20,15,10,.45)] ring-1 ring-black/10">
+        <img src={media(p.img)} alt={`${name}: preview`} loading="lazy" draggable={false} className="aspect-[16/10] w-full object-cover" />
+      </div>
+    );
+  }
   if (p.shape === "phone") {
     return (
       <div className="grid aspect-[16/10] w-full place-items-center overflow-hidden rounded-xl bg-[linear-gradient(135deg,#2b1d3d,#191428_55%,#d99a56)] ring-1 ring-ink/10">

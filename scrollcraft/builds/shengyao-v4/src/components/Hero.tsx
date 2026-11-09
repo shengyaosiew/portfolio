@@ -46,7 +46,7 @@ export default function Hero() {
   const words = H.bigName.split(" ");
 
   return (
-    <section id="top" ref={sectionRef} className="hero relative h-[100dvh] min-h-[600px] overflow-hidden bg-bone">
+    <section id="top" ref={sectionRef} className="hero relative isolate h-[100dvh] min-h-[600px] overflow-hidden bg-bone">
       {/* 1 dot field */}
       <div className="hero-dots pointer-events-none absolute inset-0 top-16 opacity-[0.16]" aria-hidden="true" />
 

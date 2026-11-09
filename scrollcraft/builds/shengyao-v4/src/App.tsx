@@ -8,6 +8,7 @@ import AIIntro from "./components/AIIntro";
 import Tickets from "./components/Tickets";
 import Reach from "./components/Reach";
 import Journey from "./components/Journey";
+import Skills from "./components/Skills";
 import Events from "./components/Events";
 import Projects from "./components/Projects";
 import Contact from "./components/Contact";
@@ -38,6 +39,7 @@ export default function App() {
         <Tickets />
         <Reach />
         <Journey />
+        <Skills />
         <Events />
         <Projects />
         <Contact />

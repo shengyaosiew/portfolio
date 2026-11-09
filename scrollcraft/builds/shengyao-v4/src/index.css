@@ -132,6 +132,37 @@ html.dark .grain { mix-blend-mode: screen; opacity: 0.05; filter: invert(1); }
 .glow-drift { animation: drift 16s ease-in-out infinite; }
 @keyframes drift2 { 0%, 100% { transform: translate(8%, 10%) scale(1.1); } 50% { transform: translate(-12%, -6%) scale(0.95); } }
 .glow-drift-2 { animation: drift2 20s ease-in-out infinite; }
+/* mobile menu */
+@keyframes menuIn { from { opacity: 0; transform: translateY(-14px); } to { opacity: 1; transform: none; } }
+.menu-in { animation: menuIn 0.35s var(--ease-out-expo); }
+.menu-fade { opacity: 0; animation: fadeIn 0.25s ease forwards; }
+
+/* LinkedIn CTA: a short double hop every 3.2s, a ring that breathes out, a light sweep */
+@keyframes liHop {
+  0%, 62%, 100% { transform: translateY(0) scale(1); }
+  68% { transform: translateY(-9px) scale(1.04, 0.96); }
+  74% { transform: translateY(0) scale(1.06, 0.94); }
+  80% { transform: translateY(-4px) scale(1); }
+  86% { transform: translateY(0); }
+}
+.li-hop { animation: liHop 3.2s cubic-bezier(0.3, 0, 0.3, 1) infinite; }
+@keyframes liRing { 0%, 60% { transform: scale(0.85); opacity: 0; } 70% { opacity: 0.8; } 100% { transform: scale(1.55); opacity: 0; } }
+.li-ring { animation: liRing 3.2s ease-out infinite; }
+@keyframes liSweep { 0%, 70% { transform: translateX(0) skewX(-20deg); } 100% { transform: translateX(420%) skewX(-20deg); } }
+.li-sweep { animation: liSweep 3.2s ease-in-out infinite; }
+
+/* skills: cursor spotlight on cards, animated border on the main card */
+.spot { position: relative; isolation: isolate; }
+.spot::before { content: ""; position: absolute; inset: 0; border-radius: inherit; z-index: -1; opacity: 0; transition: opacity 0.3s ease;
+  background: radial-gradient(420px circle at var(--sx, 50%) var(--sy, 50%), color-mix(in srgb, var(--color-accent) 14%, transparent), transparent 60%); }
+.spot:hover::before { opacity: 1; }
+@property --ang { syntax: "<angle>"; inherits: false; initial-value: 0deg; }
+@keyframes spinAng { to { --ang: 360deg; } }
+.ring-border { position: relative; }
+.ring-border::after { content: ""; position: absolute; inset: 0; border-radius: inherit; padding: 1.5px; pointer-events: none;
+  background: conic-gradient(from var(--ang), transparent 0 55%, #0078d4 70%, #4aa3ff 80%, transparent 92%);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask-composite: exclude;
+  animation: spinAng 5s linear infinite; }
 @keyframes marquee { to { transform: translateX(-50%); } }
 .marquee { animation: marquee 38s linear infinite; }
 /* button shine */
@@ -142,6 +173,7 @@ html.dark .grain { mix-blend-mode: screen; opacity: 0.05; filter: invert(1); }
 @media (prefers-reduced-motion: reduce) {
   .grain { display: none; }
   .hero-rise, .nav-drop, .name-letter, .portrait-in, .seal-in { animation: none !important; opacity: 1 !important; transform: none !important; filter: none !important; }
-  .seal-spin, .glow-drift, .glow-drift-2 { animation: none !important; }
+  .seal-spin, .glow-drift, .glow-drift-2, .li-hop, .li-ring, .li-sweep, .ring-border::after, .marquee { animation: none !important; }
+  .li-ring, .li-sweep { display: none; }
   .shine::after { display: none; }
 }

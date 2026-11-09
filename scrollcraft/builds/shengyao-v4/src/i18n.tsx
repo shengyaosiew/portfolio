@@ -3,15 +3,15 @@
 import { createContext, useContext, useEffect, useState, type ReactNode } from "react";
 
 export type Lang = "en" | "zh" | "ms";
-export const LANGS: { id: Lang; short: string; name: string; html: string }[] = [
-  { id: "en", short: "EN", name: "English", html: "en" },
-  { id: "zh", short: "中文", name: "中文", html: "zh-CN" },
-  { id: "ms", short: "BM", name: "Bahasa Melayu", html: "ms" },
+export const LANGS: { id: Lang; short: string; name: string; html: string; flag: string }[] = [
+  { id: "en", short: "EN", name: "English", html: "en", flag: "flag-us.png" },
+  { id: "zh", short: "中文", name: "中文", html: "zh-CN", flag: "flag-cn.png" },
+  { id: "ms", short: "BM", name: "Bahasa Melayu", html: "ms", flag: "flag-malaysia.png" },
 ];
 
 const en = {
   nav: {
-    links: { "power-bi": "Power BI", impact: "Impact", journey: "Journey", events: "Events", projects: "Projects" } as Record<string, string>,
+    links: { "power-bi": "Power BI", impact: "Impact", journey: "Journey", skills: "Skills", events: "Events", projects: "Projects" } as Record<string, string>,
     email: "Email me",
     top: "Siew Sheng Yao, back to top",
     name: "Siew Sheng Yao",
@@ -24,6 +24,8 @@ const en = {
     theme: "Theme",
     dark: "Dark",
     light: "Light",
+    linkedin: "Message me on LinkedIn",
+    linkedinSub: "Siew Sheng Yao · LinkedIn",
   },
   hero: {
     badgePre: "Microsoft Certified: ",
@@ -115,8 +117,9 @@ const en = {
   journey: {
     heading: "My path so far.",
     intro: "From running an online shop to building dashboards for a global company.",
-    tabs: { career: "Career journey", certs: "Certificates & skills" },
-    tabsAria: "Choose what to show",
+    secLabel: "Certificates & skills",
+    secH2: "What I can do.",
+    secIntro: "4 certificates, and the tools I use at work every day.",
     certsTitle: "Certificates",
     skillsTitle: "Skills",
     verify: "Verify",
@@ -217,7 +220,7 @@ const en = {
       namecard: { name: "Digital Name Card", tags: "Share contacts by QR", desc: "One QR code for Kedai Ubat Wey Cang: WhatsApp, Shopee, Lazada, Facebook and Google Maps.", go: "Visit" },
       grocery: { name: "Grocery Store", tags: "PHP and SQL", desc: "An online grocery store with sign-in, built with PHP and SQL. Video walkthrough.", go: "Watch" },
       chatbot: { name: "AI Chatbot", tags: "Python · spaCy · Streamlit", desc: "A chatbot built with Python and spaCy, hosted on Streamlit.", go: "Try it" },
-      ipsskin: { name: "IPS Skin", tags: "Booking and online shop", desc: "Booking system and online shop for a beauty brand.", go: "" },
+      ipsskin: { name: "IPS Skin", tags: "Booking and online shop", desc: "Booking system and online shop for a beauty brand.", go: "Visit" },
     } as Record<string, { name: string; tags: string; desc: string; go: string }>,
   },
   contact: {
@@ -238,7 +241,7 @@ export type Dict = typeof en;
 
 const zh: Dict = {
   nav: {
-    links: { "power-bi": "Power BI", impact: "成果", journey: "经历", events: "活动", projects: "作品" },
+    links: { "power-bi": "Power BI", impact: "成果", journey: "经历", skills: "技能", events: "活动", projects: "作品" },
     email: "发邮件",
     top: "萧胜耀，返回顶部",
     name: "萧胜耀",
@@ -251,6 +254,8 @@ const zh: Dict = {
     theme: "主题",
     dark: "深色",
     light: "浅色",
+    linkedin: "在 LinkedIn 上联系我",
+    linkedinSub: "萧胜耀 · LinkedIn",
   },
   hero: {
     badgePre: "微软认证：",
@@ -342,8 +347,9 @@ const zh: Dict = {
   journey: {
     heading: "我的成长历程。",
     intro: "从经营网店，到为跨国公司打造仪表板。",
-    tabs: { career: "职业历程", certs: "证书与技能" },
-    tabsAria: "选择要显示的内容",
+    secLabel: "证书与技能",
+    secH2: "我能做什么。",
+    secIntro: "4 张证书，以及我每天在工作中使用的工具。",
     certsTitle: "证书",
     skillsTitle: "技能",
     verify: "验证",
@@ -444,7 +450,7 @@ const zh: Dict = {
       namecard: { name: "电子名片", tags: "扫码分享联系方式", desc: "伟康药行的一个二维码：WhatsApp、Shopee、Lazada、Facebook 和 Google 地图。", go: "访问" },
       grocery: { name: "网上杂货店", tags: "PHP 与 SQL", desc: "用 PHP 和 SQL 开发的网上杂货店，带登录功能。附演示视频。", go: "观看" },
       chatbot: { name: "AI 聊天机器人", tags: "Python · spaCy · Streamlit", desc: "用 Python 和 spaCy 开发的聊天机器人，部署在 Streamlit 上。", go: "试用" },
-      ipsskin: { name: "IPS Skin", tags: "预约与网店", desc: "为美容品牌打造的预约系统和网店。", go: "" },
+      ipsskin: { name: "IPS Skin", tags: "预约与网店", desc: "为美容品牌打造的预约系统和网店。", go: "访问" },
     },
   },
   contact: {
@@ -463,7 +469,7 @@ const zh: Dict = {
 
 const ms: Dict = {
   nav: {
-    links: { "power-bi": "Power BI", impact: "Impak", journey: "Perjalanan", events: "Acara", projects: "Projek" },
+    links: { "power-bi": "Power BI", impact: "Impak", journey: "Perjalanan", skills: "Kemahiran", events: "Acara", projects: "Projek" },
     email: "E-mel saya",
     top: "Siew Sheng Yao, kembali ke atas",
     name: "Siew Sheng Yao",
@@ -476,6 +482,8 @@ const ms: Dict = {
     theme: "Tema",
     dark: "Gelap",
     light: "Cerah",
+    linkedin: "Mesej saya di LinkedIn",
+    linkedinSub: "Siew Sheng Yao · LinkedIn",
   },
   hero: {
     badgePre: "Bertauliah Microsoft: ",
@@ -567,8 +575,9 @@ const ms: Dict = {
   journey: {
     heading: "Perjalanan saya setakat ini.",
     intro: "Daripada mengendalikan kedai dalam talian kepada membina papan pemuka untuk syarikat global.",
-    tabs: { career: "Perjalanan kerjaya", certs: "Sijil & kemahiran" },
-    tabsAria: "Pilih apa yang hendak dipaparkan",
+    secLabel: "Sijil & kemahiran",
+    secH2: "Apa yang saya boleh buat.",
+    secIntro: "4 sijil, dan alatan yang saya guna di tempat kerja setiap hari.",
     certsTitle: "Sijil",
     skillsTitle: "Kemahiran",
     verify: "Sahkan",
@@ -669,7 +678,7 @@ const ms: Dict = {
       namecard: { name: "Kad Nama Digital", tags: "Kongsi kenalan melalui QR", desc: "Satu kod QR untuk Kedai Ubat Wey Cang: WhatsApp, Shopee, Lazada, Facebook dan Google Maps.", go: "Lawati" },
       grocery: { name: "Kedai Runcit", tags: "PHP dan SQL", desc: "Kedai runcit dalam talian dengan log masuk, dibina dengan PHP dan SQL. Video tunjuk cara.", go: "Tonton" },
       chatbot: { name: "Chatbot AI", tags: "Python · spaCy · Streamlit", desc: "Chatbot yang dibina dengan Python dan spaCy, dihoskan di Streamlit.", go: "Cuba" },
-      ipsskin: { name: "IPS Skin", tags: "Tempahan dan kedai dalam talian", desc: "Sistem tempahan dan kedai dalam talian untuk jenama kecantikan.", go: "" },
+      ipsskin: { name: "IPS Skin", tags: "Tempahan dan kedai dalam talian", desc: "Sistem tempahan dan kedai dalam talian untuk jenama kecantikan.", go: "Lawati" },
     },
   },
   contact: {
