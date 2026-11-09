@@ -1,0 +1,2 @@
+const { chromium } = require('playwright-core');
+(async () => { const b = await chromium.launch({ executablePath: 'C:/Program Files/Google/Chrome/Application/chrome.exe' }); const p = await b.newPage({ viewport: { width: 400, height: 400 } }); await p.goto('file:///' + process.cwd().replace(/\\/g,'/') + '/assets/ms-associate-badge.svg'); await p.screenshot({ path: 'lab/review/badge.png' }); await b.close(); })();

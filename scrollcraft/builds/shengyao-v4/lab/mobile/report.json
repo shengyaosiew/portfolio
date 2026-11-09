@@ -1,0 +1,88 @@
+{
+  "meta": {
+    "title": "ShengYao",
+    "lang": "en",
+    "dark": false
+  },
+  "errors": [],
+  "failed": [],
+  "overflow": 0,
+  "report": [
+    {
+      "file": "lab/mobile/00-hero-0.png",
+      "videoTime": null
+    },
+    {
+      "file": "lab/mobile/01-powerbi-0.15.png",
+      "videoTime": null
+    },
+    {
+      "file": "lab/mobile/02-powerbi-0.5.png",
+      "videoTime": null
+    },
+    {
+      "file": "lab/mobile/03-powerbi-1.png",
+      "videoTime": null
+    },
+    {
+      "file": "lab/mobile/04-hours-0.3.png",
+      "videoTime": null
+    },
+    {
+      "file": "lab/mobile/05-ai-0.png",
+      "videoTime": null
+    },
+    {
+      "file": "lab/mobile/06-ai-0.5.png",
+      "videoTime": null
+    },
+    {
+      "file": "lab/mobile/07-ai-1.png",
+      "videoTime": null
+    },
+    {
+      "file": "lab/mobile/08-tickets-0.3.png",
+      "videoTime": null
+    },
+    {
+      "file": "lab/mobile/09-tickets-0.55.png",
+      "videoTime": null
+    },
+    {
+      "file": "lab/mobile/10-tickets-1.png",
+      "videoTime": null
+    },
+    {
+      "file": "lab/mobile/11-reach-0.45.png",
+      "videoTime": null
+    },
+    {
+      "file": "lab/mobile/12-journey-0.4.png",
+      "videoTime": null
+    },
+    {
+      "file": "lab/mobile/13-journey-certs.png",
+      "videoTime": null
+    },
+    {
+      "file": "lab/mobile/14-journey-skills.png",
+      "videoTime": null
+    },
+    {
+      "file": "lab/mobile/15-events-0.1.png",
+      "videoTime": null
+    },
+    {
+      "file": "lab/mobile/16-projects-0.2.png",
+      "videoTime": null
+    },
+    {
+      "file": "lab/mobile/17-projects-step2.png",
+      "videoTime": null
+    },
+    {
+      "file": "lab/mobile/18-contact-0.png",
+      "videoTime": null
+    }
+  ]
+}

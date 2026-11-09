@@ -1,0 +1,88 @@
+{
+  "meta": {
+    "title": "ShengYao",
+    "lang": "zh-CN",
+    "dark": false
+  },
+  "errors": [],
+  "failed": [],
+  "overflow": 0,
+  "report": [
+    {
+      "file": "lab/mzh/00-hero-0.png",
+      "videoTime": null
+    },
+    {
+      "file": "lab/mzh/01-powerbi-0.15.png",
+      "videoTime": null
+    },
+    {
+      "file": "lab/mzh/02-powerbi-0.5.png",
+      "videoTime": null
+    },
+    {
+      "file": "lab/mzh/03-powerbi-1.png",
+      "videoTime": null
+    },
+    {
+      "file": "lab/mzh/04-hours-0.3.png",
+      "videoTime": null
+    },
+    {
+      "file": "lab/mzh/05-ai-0.png",
+      "videoTime": null
+    },
+    {
+      "file": "lab/mzh/06-ai-0.5.png",
+      "videoTime": null
+    },
+    {
+      "file": "lab/mzh/07-ai-1.png",
+      "videoTime": null
+    },
+    {
+      "file": "lab/mzh/08-tickets-0.3.png",
+      "videoTime": null
+    },
+    {
+      "file": "lab/mzh/09-tickets-0.55.png",
+      "videoTime": null
+    },
+    {
+      "file": "lab/mzh/10-tickets-1.png",
+      "videoTime": null
+    },
+    {
+      "file": "lab/mzh/11-reach-0.45.png",
+      "videoTime": null
+    },
+    {
+      "file": "lab/mzh/12-journey-0.4.png",
+      "videoTime": null
+    },
+    {
+      "file": "lab/mzh/13-journey-certs.png",
+      "videoTime": null
+    },
+    {
+      "file": "lab/mzh/14-journey-skills.png",
+      "videoTime": null
+    },
+    {
+      "file": "lab/mzh/15-events-0.1.png",
+      "videoTime": null
+    },
+    {
+      "file": "lab/mzh/16-projects-0.2.png",
+      "videoTime": null
+    },
+    {
+      "file": "lab/mzh/17-projects-step2.png",
+      "videoTime": null
+    },
+    {
+      "file": "lab/mzh/18-contact-0.png",
+      "videoTime": null
+    }
+  ]
+}
