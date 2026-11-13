@@ -1,4 +1,4 @@
-# Simple workflow for deploying static content to GitHub Pages
+# Build the latest portfolio and deploy it to GitHub Pages.
 name: Deploy static content to Pages
 
 on:
@@ -21,7 +21,7 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  # Single deploy job since we're just deploying
+  # Build and publish the same app used by the local preview.
   deploy:
     environment:
       name: github-pages
@@ -30,29 +30,28 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+          cache-dependency-path: scrollcraft/builds/shengyao-v4/package-lock.json
       - name: Setup Pages
         uses: actions/configure-pages@v5
-      # Collect only the published site files into _site/ so we don't upload
-      # node_modules, scrollcraft builds, docs, tmp, etc. (the old "path: ."
-      # uploaded the whole 400+ MB repo and timed out).
-      - name: Assemble site
+      - name: Install dependencies
+        working-directory: scrollcraft/builds/shengyao-v4
+        run: npm ci
+      - name: Build latest portfolio
+        working-directory: scrollcraft/builds/shengyao-v4
+        run: npm run build
+      - name: Preserve existing public pages and links
         run: |
-          mkdir -p _site
-          cp index.html _site/
-          cp favicon.ico _site/ 2>/dev/null || true
-          cp privacypolicy.html _site/ 2>/dev/null || true
-          cp robots.txt _site/ 2>/dev/null || true
-          cp sitemap.xml _site/ 2>/dev/null || true
-          cp google*.html _site/ 2>/dev/null || true
-          cp -r assets _site/assets
-          cp -r media _site/media
-          echo "---- _site contents ----"
-          ls -la _site
-          du -sh _site
+          cp privacypolicy.html robots.txt sitemap.xml google*.html scrollcraft/builds/shengyao-v4/dist/
+          cp -r assets/. scrollcraft/builds/shengyao-v4/dist/assets/
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: '_site'
+          path: scrollcraft/builds/shengyao-v4/dist
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
