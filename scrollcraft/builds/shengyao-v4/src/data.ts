@@ -11,7 +11,7 @@ export const CV = "./media/resume-siew-sheng-yao.pdf";
 export const media = (f: string) => `./media/${f}`;
 
 // Labels live in i18n.tsx; these are the ids and order.
-export const NAV = ["power-bi", "impact", "journey", "skills", "events", "projects"] as const;
+export const NAV = ["skills", "events", "power-bi", "impact", "journey", "projects"] as const;
 
 // Certificates (from the CV and the old site). Only PL-300 has a public verify link.
 export const CERTS = [

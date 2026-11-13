@@ -88,7 +88,6 @@ export default function PowerBI() {
             <div className="absolute inset-0 grid place-content-center justify-items-center gap-2 text-center">
               <img src={media("ms-associate-badge.svg")} alt={T.badgeAlt} className="h-auto w-[34%] min-w-[96px] drop-shadow-[0_10px_18px_rgba(0,40,90,.18)]" />
               <p className="display latin mt-1 text-3xl sm:text-4xl">PL-300</p>
-              <p className="text-sm font-semibold text-ink-soft">{T.pass}</p>
             </div>
           </div>
 

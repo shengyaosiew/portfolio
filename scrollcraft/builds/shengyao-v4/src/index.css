@@ -155,6 +155,15 @@ html.dark .grain { mix-blend-mode: screen; opacity: 0.05; filter: invert(1); }
 .li-sweep { animation: liSweep 3.2s ease-in-out infinite; }
 
 /* skills: cursor spotlight on cards, animated border on the main card */
+.skills-premium { scroll-margin-top: 5rem; }
+.skills-card-shell { transform-origin: 50% 50%; }
+.skills-card { transform-perspective: 1000px; box-shadow: 0 4px 20px -12px rgb(0 0 0 / 12%); transition: border-color 0.4s ease, box-shadow 0.4s ease; }
+.skills-card:hover, .skills-card:focus-visible { border-color: color-mix(in srgb, var(--color-msblue) 45%, transparent); box-shadow: 0 20px 45px -24px color-mix(in srgb, var(--color-msblue) 30%, transparent); }
+.skills-featured { background-image: radial-gradient(ellipse at 0% 0%, color-mix(in srgb, var(--color-msblue) 8%, transparent), transparent 70%); }
+@media (prefers-reduced-motion: reduce) {
+  .skills-premium *, .skills-premium *::before { transition: none !important; }
+  .skills-card-sweep { display: none; }
+}
 .spot { position: relative; isolation: isolate; }
 .spot::before { content: ""; position: absolute; inset: 0; border-radius: inherit; z-index: -1; opacity: 0; transition: opacity 0.3s ease;
   background: radial-gradient(420px circle at var(--sx, 50%) var(--sy, 50%), color-mix(in srgb, var(--color-accent) 14%, transparent), transparent 60%); }

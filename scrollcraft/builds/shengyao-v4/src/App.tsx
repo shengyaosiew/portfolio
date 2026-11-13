@@ -33,14 +33,14 @@ export default function App() {
       <Nav />
       <main>
         <Hero />
+        <Skills />
+        <Events />
         <PowerBI />
         <Hours />
         <AIIntro />
         <Tickets />
         <Reach />
         <Journey />
-        <Skills />
-        <Events />
         <Projects />
         <Contact />
       </main>

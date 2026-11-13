@@ -47,7 +47,7 @@ export default function WorldMap({ dots = [], lineColor = "#C93A22", reduce = fa
   dots.forEach((d) => [d.start, d.end].forEach((p) => pins.set(`${p.lat},${p.lng}`, p)));
 
   return (
-    <div className="relative aspect-[2/1] w-full font-sans">
+    <div className="relative aspect-[3/2] w-full font-sans sm:aspect-[2/1]">
       <img
         src={MAP_SRC}
         className="pointer-events-none h-full w-full select-none dark:invert [mask-image:linear-gradient(to_bottom,transparent,white_10%,white_90%,transparent)]"
